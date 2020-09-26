@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "registro-contable-front"
+    }
+  },
+  "defaultProject": "registro-contable-front",
+  "cli": {
+    "analytics": "50f1d194-42d8-46ae-be74-f8f3620ce9f2"
+  }
 }
