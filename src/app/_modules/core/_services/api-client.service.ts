@@ -42,9 +42,23 @@ export class ApiClientService {
     return this.httpClient.delete(url, { headers: this.getHeaders() }).toPromise();
   }
 
-  public doPost(path: string, body: any): Promise<any> {
+  public doPost(path: string, body: any, customHeaders?: Map<string, string>): Promise<any> {
     const url = `${this.backUrl}${path}`;
-    return this.httpClient.post(url, body, { headers: this.getHeaders() }).toPromise();
+    var headers = this.getHeaders();
+    customHeaders?.forEach((v, k) => {
+      headers = headers.append(k, v);
+    });
+    return this.httpClient.post(url, body, { headers: headers }).toPromise();
+  }
+
+  public doPostFormData(path: string, body: FormData, customHeaders?: Map<string, string>): Promise<any> {
+    const url = `${this.backUrl}${path}`;
+    var headers = this.getHeaders();
+    customHeaders?.forEach((v, k) => {
+      headers = headers.append(k, v);
+    });
+    headers.append('Content-Type', undefined)
+    return this.httpClient.post(url, body, { headers: headers }).toPromise();
   }
 
   public doPut(path: string, body: any): Promise<any> {

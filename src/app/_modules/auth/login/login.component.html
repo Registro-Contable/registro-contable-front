@@ -16,15 +16,20 @@
         </div>
 
         <div class="card-body">
-            <form name="login-form" id="login-form" enctype="multipart/form-data" method="POST">
-                <input id="grant_type" type="hidden" name="grant_type" value="password">
+
+            <div class="alert alert-danger mt-3" role="alert" *ngIf="errorMsg != null">
+                {{errorMsg}}
+            </div>
+
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" id="login-form">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">
                             <fa-icon [icon]="faUser"></fa-icon>
                         </span>
                     </div>
-                    <input id="user" type="text" class="form-control" name="user" value="" placeholder="User">
+                    <input type="email" class="form-control" name="user" formControlName="fcUsuario" placeholder="User"
+                        required>
                 </div>
 
                 <div class="input-group mb-3">
@@ -33,11 +38,13 @@
                             <fa-icon [icon]="faLock"></fa-icon>
                         </span>
                     </div>
-                    <input id="password" type="password" class="form-control" name="password" placeholder="Password">
+                    <input type="password" class="form-control" name="password" formControlName="fcPassword"
+                        placeholder="Password" required>
                 </div>
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-block btn-success">ENTRAR </button>
+                    <button [disabled]="!loginForm.valid" type="submit" class="btn btn-block btn-success">ENTRAR
+                    </button>
                 </div>
             </form>
         </div>

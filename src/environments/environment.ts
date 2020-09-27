@@ -6,8 +6,8 @@ export const environment = {
   production: false,
   api: {
     baseUrl: "http://localhost:8080",
-    api_client: "",
-    api_secret: "",
+    api_client: "test",
+    api_secret: "12345",
     services_url: {
       auth_service: "/api/auth"
     }
