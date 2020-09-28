@@ -9,7 +9,8 @@ export const environment = {
     api_client: "test",
     api_secret: "12345",
     services_url: {
-      auth_service: "/api/auth"
+      auth_service: "/api/auth",
+      cuentas_service: "/api/cuentas"
     }
   }
 };

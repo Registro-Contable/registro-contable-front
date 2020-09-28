@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './_modules/auth/login/login.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { MainComponent } from './main/main.component';
+import { CuentasMainComponent } from './_modules/cuentas/cuentas-main/cuentas-main.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -10,7 +11,7 @@ const routes: Routes = [
   {
     path: 'app', component: MainComponent, canActivate: [AuthGuard],
     children: [
-      { path: 'asd', component: MainComponent },
+      { path: 'cuentas', component: CuentasMainComponent },
     ]
   }
 ];
