@@ -8,9 +8,8 @@ import { CuentasMainComponent } from './cuentas-main/cuentas-main.component';
 @NgModule({
   declarations: [CuentasMainComponent, CuentaItemComponent],
   imports: [
-    MatListModule,
     CommonModule,
-
+    MatListModule
   ],
   exports: [
     CuentasMainComponent,

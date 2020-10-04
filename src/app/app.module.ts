@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 import { AuthModule } from './_modules/auth/auth.module';
+import { CuentasModule } from './_modules/cuentas/cuentas.module';
 
 
 
@@ -22,6 +23,7 @@ import { AuthModule } from './_modules/auth/auth.module';
     AuthModule,
     FontAwesomeModule,
     BrowserAnimationsModule,
+    CuentasModule
   ],
   providers: [],
   bootstrap: [AppComponent]
