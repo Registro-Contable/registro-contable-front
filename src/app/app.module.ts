@@ -9,6 +9,7 @@ import { MainComponent } from './main/main.component';
 import { AuthModule } from './_modules/auth/auth.module';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
