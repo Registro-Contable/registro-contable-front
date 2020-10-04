@@ -1,11 +1,10 @@
-<div class="container">
-    <p>cuentas-main works!</p>
-     <mat-list>
-        <div>
-            <div mat-subheader>Folders</div>
-            <mat-list-item>Item 1</mat-list-item>
-            <mat-list-item>Item 2</mat-list-item>
-            <mat-list-item>Item 3</mat-list-item>
+<div class="container cuentas-main">
+
+    <app-balance-total [totalCapital]="capitalTotal" [totalDeber]="deberTotal"></app-balance-total>
+
+    <mat-list>
+        <div *ngFor="let cuentas of cuentasMap | keyvalue" class="lista-cuentas-group mt-4">
+            <app-grupo-cuentas [tipoCuenta]="tipoCuentas.get(cuentas.key)" [listaCuentas]="cuentas.value"></app-grupo-cuentas>
         </div>
     </mat-list>
 </div>

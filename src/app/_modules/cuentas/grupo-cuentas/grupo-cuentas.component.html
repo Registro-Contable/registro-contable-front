@@ -1,0 +1,10 @@
+<div mat-subheader class="d-flex justify-content-between lista-cuentas-group-title ml-3">
+    <span>{{ tipoCuenta.nombre }}</span>
+    <span>{{ totalCapital }} €</span>
+</div>
+<mat-list-item>
+    <div mat-line *ngFor="let cuenta of listaCuentas; let first = first" [ngClass]="{'border-top' : first}"
+        class="border-right border-left border-bottom p-2">
+        <app-cuenta-item [cuenta]="cuenta"></app-cuenta-item>
+    </div>
+</mat-list-item>
