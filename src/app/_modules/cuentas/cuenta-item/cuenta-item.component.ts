@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Cuenta } from '../cuentas.models';
+import { Cuenta, CuentaRequest } from '../cuentas.models';
 import { DialogNombreCuentaComponent } from '../dialog-nombre-cuenta/dialog-nombre-cuenta.component';
 import { CuentasApiClientService } from '../_services/cuentas-api-client.service';
 
@@ -13,6 +13,9 @@ export class CuentaItemComponent implements OnInit {
 
   @Input("cuenta")
   cuenta: Cuenta;
+
+  @Output()
+  refrescar = new EventEmitter<boolean>();
 
   constructor(public dialog: MatDialog, private cuentasApiClient: CuentasApiClientService) { }
 
@@ -27,9 +30,10 @@ export class CuentaItemComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        var cuentaAux = this.cuenta;
-        cuentaAux.nombre = result;
-        this.cuentasApiClient.modificarCuenta(cuentaAux)
+        var cuentaAux: CuentaRequest = {
+          nombre: result
+        };
+        this.cuentasApiClient.modificarCuenta(this.cuenta.id, cuentaAux)
           .then(res => this.cuenta = res)
           .catch(err => {
             console.log(err);
@@ -39,4 +43,15 @@ export class CuentaItemComponent implements OnInit {
     });
   }
 
+  borrarCuenta(): void {
+    var confirm = window.confirm(`¿Seguro que quieres borrar la cuenta ${this.cuenta.nombre}`);
+    if(confirm) {
+      this.cuentasApiClient.borrarCuenta(this.cuenta.id)
+          .then(res => this.refrescar.emit(true))
+          .catch(err => {
+            console.log(err);
+            alert(err);
+          })
+    }
+  }
 }

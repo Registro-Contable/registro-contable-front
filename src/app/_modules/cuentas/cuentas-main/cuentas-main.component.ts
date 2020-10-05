@@ -18,6 +18,12 @@ export class CuentasMainComponent implements OnInit {
     this.listaCuentasRequest();
   }
 
+  procesaRefrescar(refrescar) {
+    if (refrescar) {
+      this.listaCuentasRequest();
+    }
+  }
+
   get capitalTotal(): number {
     var sum = 0
     this.cuentasMap.forEach((v, k) => {
@@ -45,6 +51,8 @@ export class CuentasMainComponent implements OnInit {
   private listaCuentasRequest() {
     this.cuentasApiClient.listaCuentas()
       .then(data => {
+        this.tipoCuentas = new Map();
+        this.cuentasMap = new Map();
         data.forEach(c => {
           if (c.tipoCuenta) {
             this.tipoCuentas.set(c.tipoCuenta.id, c.tipoCuenta);

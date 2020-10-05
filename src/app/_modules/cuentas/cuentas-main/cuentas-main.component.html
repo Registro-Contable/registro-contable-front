@@ -1,10 +1,17 @@
-<div class="container cuentas-main">
+<div class="cuentas-main">
 
-    <app-balance-total [totalCapital]="capitalTotal" [totalDeber]="deberTotal"></app-balance-total>
+    <app-cuentas-toolbar (refrescar)="procesaRefrescar($event)"></app-cuentas-toolbar>
 
-    <mat-list>
-        <div *ngFor="let cuentas of cuentasMap | keyvalue" class="lista-cuentas-group mt-4">
-            <app-grupo-cuentas [tipoCuenta]="tipoCuentas.get(cuentas.key)" [listaCuentas]="cuentas.value"></app-grupo-cuentas>
-        </div>
-    </mat-list>
+    <div class="container">
+        <app-balance-total [totalCapital]="capitalTotal" [totalDeber]="deberTotal"></app-balance-total>
+
+        <mat-list>
+            <div *ngFor="let cuentas of cuentasMap | keyvalue" class="lista-cuentas-group mt-4">
+                <app-grupo-cuentas (refrescar)="procesaRefrescar($event)" [tipoCuenta]="tipoCuentas.get(cuentas.key)"
+                    [listaCuentas]="cuentas.value">
+                </app-grupo-cuentas>
+            </div>
+        </mat-list>
+    </div>
+
 </div>

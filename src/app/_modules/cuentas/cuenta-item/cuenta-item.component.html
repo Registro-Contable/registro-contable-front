@@ -2,7 +2,7 @@
     <ng-template matMenuContent let-idCuenta="idCuenta">
         <button mat-menu-item (click)="openRenombrarDialog()">Renombrar</button>
         <button mat-menu-item>Cambiar saldo</button>
-        <button mat-menu-item>Borrar</button>
+        <button mat-menu-item (click)="borrarCuenta()">Borrar</button>
     </ng-template>
 </mat-menu>
 

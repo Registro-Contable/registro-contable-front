@@ -12,9 +12,17 @@ import { DialogNombreCuentaComponent } from './dialog-nombre-cuenta/dialog-nombr
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { CuentasToolbarComponent } from './cuentas-toolbar/cuentas-toolbar.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { DialogCrearCuentaComponent } from './dialog-crear-cuenta/dialog-crear-cuenta.component';
+import { MatSelectModule } from '@angular/material/select';
+
+
+
 
 @NgModule({
-  declarations: [CuentasMainComponent, CuentaItemComponent, BalanceTotalComponent, GrupoCuentasComponent, DialogNombreCuentaComponent],
+  declarations: [CuentasMainComponent, CuentaItemComponent, BalanceTotalComponent, GrupoCuentasComponent, DialogNombreCuentaComponent, CuentasToolbarComponent, DialogCrearCuentaComponent],
   imports: [
     CommonModule,
     MatListModule,
@@ -23,7 +31,10 @@ import { FormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatButtonModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatSelectModule
   ],
   exports: [
     CuentasMainComponent,

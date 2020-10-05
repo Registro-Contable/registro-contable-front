@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Cuenta, TipoCuenta } from '../cuentas.models';
 
 @Component({
@@ -13,6 +13,9 @@ export class GrupoCuentasComponent implements OnInit {
   @Input()
   listaCuentas: Array<Cuenta>
 
+  @Output()
+  refrescar = new EventEmitter<boolean>();
+
   constructor() { }
 
   ngOnInit(): void {
@@ -22,5 +25,9 @@ export class GrupoCuentasComponent implements OnInit {
     var sum = 0;
     this.listaCuentas.forEach(c => sum += c.capital);
     return sum;
+  }
+
+  procesaRefrescar(refrescar) {
+    this.refrescar.emit(refrescar);
   }
 }
