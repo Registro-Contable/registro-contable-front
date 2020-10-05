@@ -15,4 +15,8 @@ export class CuentasApiClientService {
   listaCuentas(): Promise<Array<Cuenta>> {
     return this.apiClient.doGet(this.pathBase);
   }
+
+  modificarCuenta(cuenta: Cuenta): Promise<Cuenta> {
+    return this.apiClient.doPut(`${this.pathBase}/${cuenta.id}`, cuenta);
+  }
 }

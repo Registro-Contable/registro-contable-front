@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Cuenta } from '../cuentas.models';
 import { DialogNombreCuentaComponent } from '../dialog-nombre-cuenta/dialog-nombre-cuenta.component';
+import { CuentasApiClientService } from '../_services/cuentas-api-client.service';
 
 @Component({
   selector: 'app-cuenta-item',
@@ -13,7 +14,7 @@ export class CuentaItemComponent implements OnInit {
   @Input("cuenta")
   cuenta: Cuenta;
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private cuentasApiClient: CuentasApiClientService) { }
 
   ngOnInit(): void {
   }
@@ -26,7 +27,14 @@ export class CuentaItemComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        alert(result);
+        var cuentaAux = this.cuenta;
+        cuentaAux.nombre = result;
+        this.cuentasApiClient.modificarCuenta(cuentaAux)
+          .then(res => this.cuenta = res)
+          .catch(err => {
+            console.log(err);
+            alert(err);
+          })
       }
     });
   }
