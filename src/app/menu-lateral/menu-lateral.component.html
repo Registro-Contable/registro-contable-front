@@ -1,0 +1,47 @@
+<div class="menu-lateral" [ngClass]="{'menu-lateral-expandido' : isExpanded, 'menu-lateral-contraido' : !isExpanded}">
+    <mat-toolbar>
+        <button mat-icon-button aria-label="Expandir o contraer el menu lateral" (click)="toggleMenu()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <span class="menu-lateral-contraido-hidden">Registro contable</span>
+    </mat-toolbar>
+
+    <mat-list>
+        <mat-list-item mat-button [routerLink]="'/app/cuentas'" class="cursor-mano">
+            <div class="d-flex flex-row align-items-center">
+                <span class="pr-2">
+                    <mat-icon>account_balance_wallet</mat-icon>
+                </span>
+                <span class="menu-lateral-contraido-hidden">Cuentas</span>
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item mat-button class="cursor-mano">
+            <div class="d-flex flex-row align-items-center">
+                <span class="pr-2">
+                    <mat-icon>table_view</mat-icon>
+                </span>
+                <span class="menu-lateral-contraido-hidden">Movimientos</span>
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item mat-button class="cursor-mano">
+            <div class="d-flex flex-row align-items-center">
+                <span class="pr-2">
+                    <mat-icon>analytics</mat-icon>
+                </span>
+                <span class="menu-lateral-contraido-hidden">Estadísticas</span>
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item mat-button class="cursor-mano">
+            <div class="d-flex flex-row align-items-center">
+                <span class="pr-2">
+                    <mat-icon>settings</mat-icon>
+                </span>
+                <span class="menu-lateral-contraido-hidden">Ajustes</span>
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+    </mat-list>
+</div>

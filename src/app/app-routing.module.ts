@@ -11,6 +11,7 @@ const routes: Routes = [
   {
     path: 'app', component: MainComponent, canActivate: [AuthGuard],
     children: [
+      { path: '', component: CuentasMainComponent },
       { path: 'cuentas', component: CuentasMainComponent },
     ]
   }

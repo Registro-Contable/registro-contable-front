@@ -1,3 +1,10 @@
-<main class="mainContainer">
-    <router-outlet></router-outlet>
-</main>
+<mat-drawer-container class="mainContainer">
+    <mat-drawer mode="side" opened>
+        <app-menu-lateral></app-menu-lateral>
+    </mat-drawer>
+    <mat-drawer-content>
+        <main class="mainContainer">
+            <router-outlet></router-outlet>
+        </main>
+    </mat-drawer-content>
+</mat-drawer-container>

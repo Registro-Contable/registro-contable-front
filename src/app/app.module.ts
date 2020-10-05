@@ -8,13 +8,20 @@ import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 import { AuthModule } from './_modules/auth/auth.module';
 import { CuentasModule } from './_modules/cuentas/cuentas.module';
-
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatButtonModule } from '@angular/material/button';
+import { MenuLateralComponent } from './menu-lateral/menu-lateral.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatListModule } from '@angular/material/list';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainComponent
+    MainComponent,
+    MenuLateralComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +30,13 @@ import { CuentasModule } from './_modules/cuentas/cuentas.module';
     AuthModule,
     FontAwesomeModule,
     BrowserAnimationsModule,
-    CuentasModule
+    CuentasModule,
+    MatSidenavModule,
+    MatButtonModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatDividerModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

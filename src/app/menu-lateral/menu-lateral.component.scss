@@ -1,0 +1,22 @@
+.menu-lateral-expandido {
+    width: 70px;
+    .menu-lateral-contraido-hidden {
+        visibility: hidden;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    .menu-lateral-expandido {
+        width: 260px;
+        .menu-lateral-contraido-hidden {
+            visibility: visible;
+        }
+    }
+}
+
+.menu-lateral-contraido {
+    width: 70px;
+    .menu-lateral-contraido-hidden {
+        visibility: hidden;
+    }
+}
