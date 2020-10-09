@@ -15,13 +15,19 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
+import { AjustesGlobalesComponent } from './ajustes-globales/ajustes-globales.component';
+import { MatCardModule } from '@angular/material/card';
+import { AjustesMainComponent } from './ajustes-main/ajustes-main.component';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
-    MenuLateralComponent
+    MenuLateralComponent,
+    AjustesGlobalesComponent,
+    AjustesMainComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +42,8 @@ import { MatListModule } from '@angular/material/list';
     MatIconModule,
     MatToolbarModule,
     MatDividerModule,
-    MatListModule
+    MatListModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
