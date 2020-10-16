@@ -6,11 +6,12 @@
     </mat-expansion-panel-header>
 
     <mat-list>
+        <button mat-raised-button color="primary" class="btn btn-block mb-2">Añadir subcategoria</button>
         <div *ngFor="let subcategoria of categoria.subCategorias">
-            <mat-divider></mat-divider>
             <app-subcategoria-item [subcategoria]="subcategoria"></app-subcategoria-item>
+            <mat-divider></mat-divider>
         </div>
-        <mat-divider></mat-divider>
+        <button mat-raised-button color="warn" class="btn btn-block mb-2">Eliminar categoria</button>
     </mat-list>
 
 
