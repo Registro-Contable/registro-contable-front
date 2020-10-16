@@ -12,4 +12,7 @@ export class CategoriasMainComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  procesaRefrescar(refrescar) {
+  }
+
 }

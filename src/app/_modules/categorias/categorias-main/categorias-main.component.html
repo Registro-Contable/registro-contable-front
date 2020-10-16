@@ -1,1 +1,16 @@
-<p>categorias-main works!</p>
+<div class="cuentas-main">
+
+    <app-categorias-toolbar (refrescar)="procesaRefrescar($event)"></app-categorias-toolbar>
+
+    <div class="container">
+        <mat-tab-group mat-align-tabs="center">
+            <mat-tab label="Ingresos">
+                <app-grupo-categorias [tipoMovimiento]="'INGRESOS'"></app-grupo-categorias>
+            </mat-tab>
+            <mat-tab label="Gastos">
+                <app-grupo-categorias [tipoMovimiento]="'GASTOS'"></app-grupo-categorias>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+
+</div>

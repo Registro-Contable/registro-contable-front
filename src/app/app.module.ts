@@ -18,6 +18,7 @@ import { MatListModule } from '@angular/material/list';
 import { AjustesGlobalesComponent } from './ajustes-globales/ajustes-globales.component';
 import { MatCardModule } from '@angular/material/card';
 import { AjustesMainComponent } from './ajustes-main/ajustes-main.component';
+import { CategoriasModule } from './_modules/categorias/categorias.module';
 
 
 
@@ -43,7 +44,8 @@ import { AjustesMainComponent } from './ajustes-main/ajustes-main.component';
     MatToolbarModule,
     MatDividerModule,
     MatListModule,
-    MatCardModule
+    MatCardModule,
+    CategoriasModule
   ],
   providers: [],
   bootstrap: [AppComponent]

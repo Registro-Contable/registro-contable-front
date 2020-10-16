@@ -1,0 +1,17 @@
+<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            {{categoria.nombre}}
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <mat-list>
+        <div *ngFor="let subcategoria of categoria.subCategorias">
+            <mat-divider></mat-divider>
+            <app-subcategoria-item [subcategoria]="subcategoria"></app-subcategoria-item>
+        </div>
+        <mat-divider></mat-divider>
+    </mat-list>
+
+
+</mat-expansion-panel>
