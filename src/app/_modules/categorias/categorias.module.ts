@@ -17,6 +17,7 @@ import { MatCardModule } from '@angular/material/card';
 import { SubcategoriaItemComponent } from './subcategoria-item/subcategoria-item.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
+import { DialogCrearCategoriaComponent } from './dialog-crear-categoria/dialog-crear-categoria.component';
 
 
 
@@ -26,7 +27,7 @@ import { MatListModule } from '@angular/material/list';
 
 
 @NgModule({
-  declarations: [CategoriasMainComponent, CategoriasToolbarComponent, GrupoCategoriasComponent, CategoriaItemComponent, SubcategoriaItemComponent],
+  declarations: [CategoriasMainComponent, CategoriasToolbarComponent, GrupoCategoriasComponent, CategoriaItemComponent, SubcategoriaItemComponent, DialogCrearCategoriaComponent],
   imports: [
     CommonModule,
     MatDialogModule,
