@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { CategoriaRequest, CategoriaResponse } from '../categorias.models';
+import { CategoriaRequest, CategoriaResponse, SubCategoriaRequest } from '../categorias.models';
 import { DialogCrearCategoriaComponent } from '../dialog-crear-categoria/dialog-crear-categoria.component';
 import { CategoriasApiClienService } from '../_services/categorias-api-clien.service';
 
@@ -23,6 +23,10 @@ export class CategoriaItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  procesaRefrescar(refrescar) {
+    this.refrescar.emit(refrescar);
+  }
+
   eliminarCategoria() {
     var confirm = window.confirm("¿Estas seguro de eliminar esta categoria?");
     if (confirm) {
@@ -37,7 +41,6 @@ export class CategoriaItemComponent implements OnInit {
 
   openModificarCategoriaDialog(): void {
     const dialogRef = this.dialog.open(DialogCrearCategoriaComponent, {
-      width: '250px',
       data: {
         titulo: `Modificar ${this.categoria.nombre}`,
         nombre: this.categoria.nombre
@@ -51,6 +54,29 @@ export class CategoriaItemComponent implements OnInit {
         };
         this.categoriasApiClient.modificarCategoria(this.categoria.id, categoria)
           .then(_ => this.refrescar.emit(true))
+          .catch(err => {
+            console.log(err);
+            alert("Error en la peticion");
+          })
+      }
+    });
+  }
+
+  openCrearSubcategoriaDialog(): void {
+    const dialogRef = this.dialog.open(DialogCrearCategoriaComponent, {
+      data: {
+        titulo: `Crear subcategoria`,
+        nombre: ""
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        var categoria: SubCategoriaRequest = {
+          nombre: result,
+        };
+        this.categoriasApiClient.addSubcategoria(this.categoria.id, categoria)
+          .then(res => this.categoria = res)
           .catch(err => {
             console.log(err);
             alert("Error en la peticion");

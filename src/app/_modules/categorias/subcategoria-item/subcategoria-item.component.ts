@@ -1,5 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { SubCategoriaResponse } from '../categorias.models';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { SubCategoriaRequest, SubCategoriaResponse } from '../categorias.models';
+import { DialogCrearCategoriaComponent } from '../dialog-crear-categoria/dialog-crear-categoria.component';
+import { CategoriasApiClienService } from '../_services/categorias-api-clien.service';
 
 @Component({
   selector: 'app-subcategoria-item',
@@ -10,10 +13,47 @@ export class SubcategoriaItemComponent implements OnInit {
 
   @Input()
   subcategoria: SubCategoriaResponse;
+  @Output()
+  refrescar = new EventEmitter<boolean>();
 
-  constructor() { }
+  constructor(public dialog: MatDialog, private categoriasApiClient: CategoriasApiClienService) { }
 
   ngOnInit(): void {
+  }
+
+  openModificarSubcategoriaDialog(): void {
+    const dialogRef = this.dialog.open(DialogCrearCategoriaComponent, {
+      data: {
+        titulo: `Modificar ${this.subcategoria.nombre}`,
+        nombre: this.subcategoria.nombre
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        var subcategoria: SubCategoriaRequest = {
+          nombre: result,
+        };
+        this.categoriasApiClient.modificarSubcategoria(this.subcategoria.parentId, this.subcategoria.id, subcategoria)
+          .then(_ => this.refrescar.emit(true))
+          .catch(err => {
+            console.log(err);
+            alert("Error en la peticion");
+          })
+      }
+    });
+  }
+
+  eliminarSubcategoria() {
+    var confirm = window.confirm("¿Estas seguro de eliminar esta categoria?");
+    if (confirm) {
+      this.categoriasApiClient.eliminarSubcategoria(this.subcategoria.parentId, this.subcategoria.id)
+        .then(_ => { this.refrescar.emit(true) })
+        .catch(err => {
+          console.log(err);
+          alert("Error en la peticion");
+        })
+    }
   }
 
 }

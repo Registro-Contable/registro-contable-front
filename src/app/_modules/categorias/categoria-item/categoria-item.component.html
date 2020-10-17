@@ -5,15 +5,15 @@
         </mat-panel-title>
     </mat-expansion-panel-header>
 
-    <button mat-raised-button color="primary" class="btn btn-block mb-2">Añadir subcategoria</button>
+    <button mat-raised-button color="primary" class="btn btn-block mb-2" (click)="openCrearSubcategoriaDialog()">Añadir subcategoria</button>
     <mat-list>
         <div *ngFor="let subcategoria of categoria.subCategorias">
-            <app-subcategoria-item [subcategoria]="subcategoria"></app-subcategoria-item>
+            <app-subcategoria-item [subcategoria]="subcategoria" (refrescar)="procesaRefrescar($event)"></app-subcategoria-item>
             <mat-divider></mat-divider>
         </div>
     </mat-list>
 
-    <div class="mb-2 row">
+    <div class="m-2 row">
         <div class="col-sm-6">
             <button mat-raised-button color="basic" class="btn btn-block" (click)="openModificarCategoriaDialog()">Editar categoria</button>
         </div>

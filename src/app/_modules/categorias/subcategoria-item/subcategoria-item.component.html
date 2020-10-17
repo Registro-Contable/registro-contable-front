@@ -3,7 +3,10 @@
 
     <span class="spacer"></span>
 
-    <button mat-icon-button>
+    <button mat-icon-button (click)="openModificarSubcategoriaDialog()">
+        <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-icon-button (click)="eliminarSubcategoria()">
         <mat-icon>remove_circle</mat-icon>
     </button>
 
