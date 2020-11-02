@@ -17,6 +17,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { DialogCrearCuentaComponent } from './dialog-crear-cuenta/dialog-crear-cuenta.component';
 import { MatSelectModule } from '@angular/material/select';
+import { MatCardModule } from '@angular/material/card';
+
 
 
 
@@ -34,7 +36,8 @@ import { MatSelectModule } from '@angular/material/select';
     FormsModule,
     MatToolbarModule,
     MatIconModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCardModule
   ],
   exports: [
     CuentasMainComponent,

@@ -5,12 +5,13 @@
 export const environment = {
   production: false,
   api: {
-    baseUrl: "http://localhost:8080",
+    baseUrl: "http://192.168.1.5:8080",
     api_client: "test",
     api_secret: "12345",
     services_url: {
       auth_service: "/api/auth",
-      cuentas_service: "/api/cuentas"
+      cuentas_service: "/api/cuentas",
+      categorias_service: "/api/categorias"
     }
   }
 };

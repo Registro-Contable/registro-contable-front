@@ -19,6 +19,8 @@ import { AjustesGlobalesComponent } from './ajustes-globales/ajustes-globales.co
 import { MatCardModule } from '@angular/material/card';
 import { AjustesMainComponent } from './ajustes-main/ajustes-main.component';
 import { CategoriasModule } from './_modules/categorias/categorias.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './auth.interceptor';
 
 
 
@@ -47,7 +49,13 @@ import { CategoriasModule } from './_modules/categorias/categorias.module';
     MatCardModule,
     CategoriasModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
