@@ -21,13 +21,14 @@ import { DialogCrearCuentaComponent } from './dialog-crear-cuenta/dialog-crear-c
 import { DialogNombreCuentaComponent } from './dialog-nombre-cuenta/dialog-nombre-cuenta.component';
 import { GrupoCuentasComponent } from './grupo-cuentas/grupo-cuentas.component';
 import { MedioPagoComponent } from './medio-pago/medio-pago.component';
+import { DialogCrearMedioPagoComponent } from './dialog-crear-medio-pago/dialog-crear-medio-pago.component';
 
 
 
 
 
 @NgModule({
-  declarations: [CuentasMainComponent, CuentaItemComponent, BalanceTotalComponent, GrupoCuentasComponent, DialogNombreCuentaComponent, CuentasToolbarComponent, DialogCrearCuentaComponent, MedioPagoComponent],
+  declarations: [CuentasMainComponent, CuentaItemComponent, BalanceTotalComponent, GrupoCuentasComponent, DialogNombreCuentaComponent, CuentasToolbarComponent, DialogCrearCuentaComponent, MedioPagoComponent, DialogCrearMedioPagoComponent],
   imports: [
     CommonModule,
     MatListModule,

@@ -6,7 +6,9 @@
         </mat-panel-title>
     </mat-expansion-panel-header>
 
-    <button mat-raised-button color="primary" class="btn btn-block mb-2">Añadir medio pago</button>
+    <button mat-raised-button color="primary" *ngIf="cuenta.tipoCuenta.tiposMedioPago.length > 0"
+        class="btn btn-block mb-2" (click)="openAddMedioPagoDialog()">Añadir medio pago</button>
+
     <mat-list>
         <div *ngFor="let medioPago of cuenta.mediosPago">
             <div *ngIf="medioPago.tipoMedioPago.id != 'DEFAULT'">

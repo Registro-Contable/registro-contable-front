@@ -1,9 +1,8 @@
 export interface TipoCuenta {
     id: string;
     nombre: string;
-    allowTarjetaDebito: boolean;
-    allowTarjetaCredito: boolean;
     deuda: boolean;
+    tiposMedioPago: Array<TipoMedioPago>;
 }
 
 export interface TipoMedioPago {

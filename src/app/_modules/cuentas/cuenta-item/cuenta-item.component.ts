@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Cuenta, CuentaRequest } from '../cuentas.models';
+import { Cuenta, CuentaRequest, MedioPagoRequest } from '../cuentas.models';
+import { DialogCrearMedioPagoComponent, DialogCrearMedioPagoData } from '../dialog-crear-medio-pago/dialog-crear-medio-pago.component';
 import { DialogNombreCuentaComponent } from '../dialog-nombre-cuenta/dialog-nombre-cuenta.component';
 import { CuentasApiClientService } from '../_services/cuentas-api-client.service';
 
@@ -37,6 +38,28 @@ export class CuentaItemComponent implements OnInit {
         };
         this.cuentasApiClient.modificarCuenta(this.cuenta.id, cuentaAux)
           .then(res => this.cuenta = res)
+          .catch(err => {
+            console.log(err);
+            alert(err);
+          })
+      }
+    });
+  }
+
+  openAddMedioPagoDialog(): void {
+    const dialogRef = this.dialog.open(DialogCrearMedioPagoComponent, {
+      width: '250px',
+      data: { tipoCuenta: this.cuenta.tipoCuenta }
+    });
+
+    dialogRef.afterClosed().subscribe((result: DialogCrearMedioPagoData) => {
+      if (result) {
+        var medioPagoAux: MedioPagoRequest = {
+          nombre: result.nombre,
+          tipoMedioPagoId: result.tipoMedioPagoId,
+        };
+        this.cuentasApiClient.crearMedioPago(this.cuenta.id, medioPagoAux)
+          .then(_ => this.refrescar.emit(true))
           .catch(err => {
             console.log(err);
             alert(err);
