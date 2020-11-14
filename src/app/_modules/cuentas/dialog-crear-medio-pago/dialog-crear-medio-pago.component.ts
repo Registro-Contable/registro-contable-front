@@ -12,8 +12,7 @@ export class DialogCrearMedioPagoComponent implements OnInit {
 
   listaTipoMediosPago: Array<TipoMedioPago> = []
 
-  constructor(public dialogRef: MatDialogRef<DialogCrearMedioPagoComponent>, private cuentasApiClient: CuentasApiClientService, 
-    @Inject(MAT_DIALOG_DATA) public data: DialogCrearMedioPagoData) { }
+  constructor(public dialogRef: MatDialogRef<DialogCrearMedioPagoComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogCrearMedioPagoData) { }
 
   ngOnInit(): void {
     this.listaTipoMediosPago = this.data.tipoCuenta.tiposMedioPago;

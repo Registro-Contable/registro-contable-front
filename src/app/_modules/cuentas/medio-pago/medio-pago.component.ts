@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { MedioPago } from '../cuentas.models';
+import { MatDialog } from '@angular/material/dialog';
+import { MedioPago, MedioPagoRequest } from '../cuentas.models';
+import { DialogNombreMedioPagoComponent } from '../dialog-nombre-medio-pago/dialog-nombre-medio-pago.component';
 import { CuentasApiClientService } from '../_services/cuentas-api-client.service';
 
 @Component({
@@ -15,9 +17,30 @@ export class MedioPagoComponent implements OnInit {
   @Output()
   refrescar = new EventEmitter<boolean>();
 
-  constructor(private cuentasApiClient: CuentasApiClientService) { }
+  constructor(public dialog: MatDialog, private cuentasApiClient: CuentasApiClientService) { }
 
   ngOnInit(): void {
+  }
+
+  openRenombrarDialog(): void {
+    const dialogRef = this.dialog.open(DialogNombreMedioPagoComponent, {
+      width: '250px',
+      data: { nombre: this.medioPago.nombre }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        var medioPagoAux: MedioPagoRequest = {
+          nombre: result
+        };
+        this.cuentasApiClient.modificarMedioPago(this.medioPago.cuentaId, this.medioPago.id, medioPagoAux)
+          .then(res => this.medioPago = res)
+          .catch(err => {
+            console.log(err);
+            alert(err);
+          })
+      }
+    });
   }
 
   eliminarSubcategoria() {
