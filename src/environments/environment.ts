@@ -11,7 +11,8 @@ export const environment = {
     services_url: {
       auth_service: "/api/auth",
       cuentas_service: "/api/cuentas",
-      categorias_service: "/api/categorias"
+      categorias_service: "/api/categorias",
+      movimientos_service: "/api/movimientos"
     }
   }
 };

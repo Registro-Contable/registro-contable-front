@@ -3,6 +3,6 @@
     <span>{{ totalCapital }} €</span>
 </div>
 
-<mat-card mat-line *ngFor="let cuenta of listaCuentas" class="p-2">
+<mat-accordion mat-line *ngFor="let cuenta of listaCuentas" class="p-2">
     <app-cuenta-item (refrescar)="procesaRefrescar($event)" [cuenta]="cuenta"></app-cuenta-item>
-</mat-card>
+</mat-accordion>

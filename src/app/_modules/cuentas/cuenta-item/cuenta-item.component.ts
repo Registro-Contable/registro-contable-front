@@ -17,6 +17,8 @@ export class CuentaItemComponent implements OnInit {
   @Output()
   refrescar = new EventEmitter<boolean>();
 
+  panelOpenState = false;
+
   constructor(public dialog: MatDialog, private cuentasApiClient: CuentasApiClientService) { }
 
   ngOnInit(): void {

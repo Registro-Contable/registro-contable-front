@@ -1,13 +1,30 @@
-<mat-menu #cuentaMenu="matMenu" xPosition="after">
-    <ng-template matMenuContent let-idCuenta="idCuenta">
-        <button mat-menu-item (click)="openRenombrarDialog()">Renombrar</button>
-        <button mat-menu-item>Cambiar saldo</button>
-        <button mat-menu-item (click)="borrarCuenta()">Borrar</button>
-    </ng-template>
-</mat-menu>
+<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+        <mat-panel-title class="d-flex justify-content-between">
+            <span>{{ cuenta.nombre }}</span>
+            <span>{{ cuenta.capital }} €</span>
+        </mat-panel-title>
+    </mat-expansion-panel-header>
 
-<div class="d-flex justify-content-between" [matMenuTriggerFor]="cuentaMenu"
-    [matMenuTriggerData]="{idCuenta: cuenta.id}">
-    <span>{{ cuenta.nombre }}</span>
-    <span>{{ cuenta.capital }} €</span>
-</div>
+    <button mat-raised-button color="primary" class="btn btn-block mb-2">Añadir medio pago</button>
+    <mat-list>
+        <div *ngFor="let medioPago of cuenta.mediosPago">
+            <div *ngIf="medioPago.tipoMedioPago.id != 'DEFAULT'">
+                <app-medio-pago [medioPago]="medioPago" (refrescar)="procesaRefrescar($event)"></app-medio-pago>
+                <mat-divider></mat-divider>
+            </div>
+        </div>
+    </mat-list>
+
+    <div class="m-2 row">
+        <div class="col-sm-6">
+            <button mat-raised-button color="basic" class="btn btn-block" (click)="openRenombrarDialog()">Editar
+                cuenta</button>
+        </div>
+        <div class="col-sm-6">
+            <button mat-raised-button color="warn" class="btn btn-block" (click)="borrarCuenta()">Eliminar
+                cuenta</button>
+        </div>
+    </div>
+
+</mat-expansion-panel>
