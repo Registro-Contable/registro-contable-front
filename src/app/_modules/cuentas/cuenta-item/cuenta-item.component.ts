@@ -25,6 +25,10 @@ export class CuentaItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  procesaRefrescar(refrescar) {
+    this.refrescar.emit(refrescar);
+  }
+
   openRenombrarDialog(): void {
     const dialogRef = this.dialog.open(DialogNombreCuentaComponent, {
       width: '250px',

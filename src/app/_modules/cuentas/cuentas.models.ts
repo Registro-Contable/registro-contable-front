@@ -24,6 +24,7 @@ export interface Cuenta {
 export interface MedioPago {
     id: string;
     uid: string;
+    cuentaId: string;
     nombre: string;
     fechaAlta: Date;
     tipoMedioPago: TipoMedioPago;
