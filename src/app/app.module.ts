@@ -21,6 +21,7 @@ import { AjustesMainComponent } from './ajustes-main/ajustes-main.component';
 import { CategoriasModule } from './_modules/categorias/categorias.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth.interceptor';
+import { MovimientosModule } from './_modules/movimientos/movimientos.module';
 
 
 
@@ -47,7 +48,8 @@ import { AuthInterceptor } from './auth.interceptor';
     MatDividerModule,
     MatListModule,
     MatCardModule,
-    CategoriasModule
+    CategoriasModule,
+    MovimientosModule
   ],
   providers: [
     {

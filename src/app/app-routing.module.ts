@@ -7,6 +7,7 @@ import { CuentasMainComponent } from './_modules/cuentas/cuentas-main/cuentas-ma
 import { AjustesGlobalesComponent } from './ajustes-globales/ajustes-globales.component';
 import { CategoriasMainComponent } from './_modules/categorias/categorias-main/categorias-main.component';
 import { AjustesMainComponent } from './ajustes-main/ajustes-main.component';
+import { MovimientosMainComponent } from './_modules/movimientos/movimientos-main/movimientos-main.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
     children: [
       { path: '', component: CuentasMainComponent },
       { path: 'cuentas', component: CuentasMainComponent },
+      { path: 'movimientos', component: MovimientosMainComponent },
       {
         path: 'ajustes', component: AjustesMainComponent,
         children: [
