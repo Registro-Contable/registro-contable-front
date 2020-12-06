@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MovimientoResponse } from '../movimientos.models';
+import { MovimientoResponse, TipoMovimiento } from '../movimientos.models';
 import { MovimientosApiClientService } from '../_service/movimientos-api-client.service';
 
 @Component({
@@ -10,14 +10,17 @@ import { MovimientosApiClientService } from '../_service/movimientos-api-client.
 export class MovimientosDiariosGroupComponent implements OnInit {
 
   dateSelected: Date;
-
   movimientosDia: Map<Number, Array<MovimientoResponse>>;
+  ingresos: number;
+  gastos: number;
 
   constructor(private movimientosApiClient: MovimientosApiClientService) { }
 
   ngOnInit(): void {
     this.movimientosDia = new Map();
     this.dateSelected = new Date();
+    this.ingresos = 0;
+    this.gastos = 0;
     this.cargarMovimientos();
   }
 
@@ -33,7 +36,7 @@ export class MovimientosDiariosGroupComponent implements OnInit {
       fromDate: firstDay,
       toDate: lastDay
     })
-      .catch(this.tratarMovimientosResponse)
+      .then(list => this.tratarMovimientosResponse(list))
       .catch(err => {
         console.log(err);
         alert(err);
@@ -41,6 +44,11 @@ export class MovimientosDiariosGroupComponent implements OnInit {
   }
 
   private tratarMovimientosResponse(movimientos: Array<MovimientoResponse>) {
+    this.ingresos = 0;
+    this.gastos = 0;
+
+    console.log(movimientos);
+
     movimientos.forEach(m => {
       var date = new Date(m.fecha);
       var day = date.getDate();
@@ -50,6 +58,14 @@ export class MovimientosDiariosGroupComponent implements OnInit {
       }
       dia.push(m);
       this.movimientosDia[day] = dia;
+
+      const tipoMovimiento = TipoMovimiento[m.tipoMovimientoId];
+      console.log(tipoMovimiento);
+      if (tipoMovimiento == TipoMovimiento.INGRESO) {
+        this.ingresos += m.cantidad;
+      } else if (tipoMovimiento == TipoMovimiento.GASTO) {
+        this.gastos += (m.cantidad*-1);
+      }
     });
   }
 
