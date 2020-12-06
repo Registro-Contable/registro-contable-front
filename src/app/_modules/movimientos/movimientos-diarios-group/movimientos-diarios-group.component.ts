@@ -9,18 +9,14 @@ import { MovimientosApiClientService } from '../_service/movimientos-api-client.
 })
 export class MovimientosDiariosGroupComponent implements OnInit {
 
-  dateSelected: Date;
-  movimientosDia: Map<Number, Array<MovimientoResponse>>;
-  ingresos: number;
-  gastos: number;
+  dateSelected: Date = new Date();
+  movimientosDia: Map<Number, Array<MovimientoResponse>> = new Map();
+  ingresos: number = 0;
+  gastos: number = 0;
 
   constructor(private movimientosApiClient: MovimientosApiClientService) { }
 
   ngOnInit(): void {
-    this.movimientosDia = new Map();
-    this.dateSelected = new Date();
-    this.ingresos = 0;
-    this.gastos = 0;
     this.cargarMovimientos();
   }
 
@@ -46,27 +42,26 @@ export class MovimientosDiariosGroupComponent implements OnInit {
   private tratarMovimientosResponse(movimientos: Array<MovimientoResponse>) {
     this.ingresos = 0;
     this.gastos = 0;
-
-    console.log(movimientos);
+    this.movimientosDia.clear();
 
     movimientos.forEach(m => {
       var date = new Date(m.fecha);
       var day = date.getDate();
-      var dia: Array<MovimientoResponse> = this.movimientosDia[day];
+      var dia: Array<MovimientoResponse> = this.movimientosDia.get(day);
       if (!dia) {
         dia = new Array();
       }
       dia.push(m);
-      this.movimientosDia[day] = dia;
+      this.movimientosDia.set(day, dia);
 
       const tipoMovimiento = TipoMovimiento[m.tipoMovimientoId];
-      console.log(tipoMovimiento);
       if (tipoMovimiento == TipoMovimiento.INGRESO) {
         this.ingresos += m.cantidad;
       } else if (tipoMovimiento == TipoMovimiento.GASTO) {
-        this.gastos += (m.cantidad*-1);
+        this.gastos += (m.cantidad * -1);
       }
     });
+    console.log(this.movimientosDia);
   }
 
 }

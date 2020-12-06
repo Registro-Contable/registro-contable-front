@@ -11,18 +11,18 @@ export interface MovimientoRequest {
 
 export interface MovimientoResponse {
     id: number;
-	uid: string;
-	fecha: string;
-	tipoMovimientoId: string;
-	categoriaId: string;
-	cuentaId: string;
-	medioPagoId: string;
-	cantidad: number;
-	concepto?: string;
+    uid: string;
+    fecha: string;
+    tipoMovimientoId: string;
+    categoriaId: string;
+    cuentaId: string;
+    medioPagoId: string;
+    cantidad: number;
+    concepto?: string;
     nota?: string;
     isMovimientoContable: boolean;
-	capitalAnterior: number;
-	capitalPosterior: number;
+    capitalAnterior: number;
+    capitalPosterior: number;
 }
 
 export enum TipoMovimiento {
@@ -30,3 +30,4 @@ export enum TipoMovimiento {
 }
 
 export const MESES = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+export const DIA_SEMANA = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo"];
