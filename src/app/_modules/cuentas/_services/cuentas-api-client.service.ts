@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ApiClientService } from '../../core/_services/api-client.service';
-import { Cuenta, CuentaRequest, MedioPago, MedioPagoRequest, TipoCuenta, TipoMedioPago } from '../cuentas.models';
+import { CapitalCuenta, Cuenta, CuentaRequest, MedioPago, MedioPagoRequest, TipoCuenta, TipoMedioPago } from '../cuentas.models';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +22,10 @@ export class CuentasApiClientService {
 
   listaCuentas(): Promise<Array<Cuenta>> {
     return this.apiClient.doGet(`${this.pathBase}/cuentas`);
+  }
+
+  capitalCuenta(idCuenta: string): Promise<CapitalCuenta> {
+    return this.apiClient.doGet(`${this.pathBase}/cuentas/${idCuenta}/capital`);
   }
 
   modificarCuenta(idCuenta: string, cuenta: CuentaRequest): Promise<Cuenta> {

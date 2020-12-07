@@ -15,10 +15,16 @@ export interface Cuenta {
     id: string;
     uid: string;
     nombre: string;
-    capital: number;
     fechaAlta: Date;
     tipoCuenta: TipoCuenta;
     mediosPago: Array<MedioPago>;
+    capitalCuenta?: CapitalCuenta;
+}
+
+export interface CapitalCuenta {
+    cuentaId: string;
+    uid: string;
+    capital: number;
 }
 
 export interface MedioPago {

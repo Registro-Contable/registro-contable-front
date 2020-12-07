@@ -23,7 +23,7 @@ export class GrupoCuentasComponent implements OnInit {
 
   get totalCapital(): number {
     var sum = 0;
-    this.listaCuentas.forEach(c => sum += c.capital);
+    this.listaCuentas.forEach(c => sum += c.capitalCuenta?.capital || 0);
     return sum;
   }
 
