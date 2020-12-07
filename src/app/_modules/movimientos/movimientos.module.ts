@@ -18,11 +18,12 @@ import { MovimientosToolbarComponent } from './movimientos-toolbar/movimientos-t
 import { ResumenBalanceComponent } from './resumen-balance/resumen-balance.component';
 import { MovimientosDiariosDiaComponent } from './movimientos-diarios-dia/movimientos-diarios-dia.component';
 import { SelectorMesesComponent } from './selector-meses/selector-meses.component';
+import { MovimientosDiariosMovimientoComponent } from './movimientos-diarios-movimiento/movimientos-diarios-movimiento.component';
 
 
 
 @NgModule({
-  declarations: [MovimientosMainComponent, MovimientosToolbarComponent, MovimientosDiariosGroupComponent, ResumenBalanceComponent, MovimientosDiariosDiaComponent, SelectorMesesComponent],
+  declarations: [MovimientosMainComponent, MovimientosToolbarComponent, MovimientosDiariosGroupComponent, ResumenBalanceComponent, MovimientosDiariosDiaComponent, SelectorMesesComponent, MovimientosDiariosMovimientoComponent],
   imports: [
     CommonModule,
     MatDialogModule,

@@ -14,15 +14,37 @@ export interface MovimientoResponse {
     uid: string;
     fecha: string;
     tipoMovimientoId: string;
-    categoriaId: string;
-    cuentaId: string;
-    medioPagoId: string;
+    categoria: CategoriaMovimientoResponse;
+    cuenta: CuentaMovimientoResponse;
     cantidad: number;
     concepto?: string;
     nota?: string;
     isMovimientoContable: boolean;
     capitalAnterior: number;
     capitalPosterior: number;
+}
+
+export interface CategoriaMovimientoResponse {
+    categoriaId: String;
+    nombre: string;
+    subCategoria?: SubCategoriaMovimientoResponse;
+}
+
+export interface SubCategoriaMovimientoResponse {
+    subCategoriaId: string;
+    parentId: string;
+    nombre?: string;
+}
+
+export interface CuentaMovimientoResponse {
+    cuentaId: string;
+    nombre?: string;
+    medioPago?: MedioPagoMovimientoResponse;
+}
+
+export interface MedioPagoMovimientoResponse {
+    medioPagoId: string;
+    nombre?: string;
 }
 
 export enum TipoMovimiento {

@@ -14,7 +14,10 @@
         <div>
             <div>{{ gastos }} €</div>
         </div>
+    </div>
 
+    <div *ngFor="let mov of movimientos" class="pt-2">
+        <app-movimientos-diarios-movimiento [movimiento]="mov"></app-movimientos-diarios-movimiento>
     </div>
 
 </div>
