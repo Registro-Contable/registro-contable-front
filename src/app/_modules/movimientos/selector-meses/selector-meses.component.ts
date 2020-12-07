@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { MESES } from '../movimientos.models';
+import { MESES } from '../../core/models/movimientos.models';
 
 @Component({
   selector: 'app-selector-meses',

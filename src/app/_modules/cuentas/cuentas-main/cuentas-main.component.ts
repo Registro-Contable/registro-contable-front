@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Cuenta, TipoCuenta } from '../cuentas.models';
-import { CuentasApiClientService } from '../_services/cuentas-api-client.service';
+import { Cuenta, TipoCuenta } from '../../core/models/cuentas.models';
+import { CuentasApiClientService } from '../../core/_services/cuentas-api-client.service';
 
 @Component({
   selector: 'app-cuentas-main',

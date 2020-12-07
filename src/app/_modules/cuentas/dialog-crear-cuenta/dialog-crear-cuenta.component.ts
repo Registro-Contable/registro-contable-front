@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { TipoCuenta } from '../cuentas.models';
-import { CuentasApiClientService } from '../_services/cuentas-api-client.service';
+import { TipoCuenta } from '../../core/models/cuentas.models';
+import { CuentasApiClientService } from '../../core/_services/cuentas-api-client.service';
 
 @Component({
   selector: 'app-dialog-crear-cuenta',

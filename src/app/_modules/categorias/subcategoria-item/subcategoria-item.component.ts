@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { SubCategoriaRequest, SubCategoriaResponse } from '../categorias.models';
+import { SubCategoriaRequest, SubCategoriaResponse } from '../../core/models/categorias.models';
+import { CategoriasApiClienService } from '../../core/_services/categorias-api-clien.service';
 import { DialogCrearCategoriaComponent } from '../dialog-crear-categoria/dialog-crear-categoria.component';
-import { CategoriasApiClienService } from '../_services/categorias-api-clien.service';
 
 @Component({
   selector: 'app-subcategoria-item',

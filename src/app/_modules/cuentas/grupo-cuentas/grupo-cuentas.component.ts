@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Cuenta, TipoCuenta } from '../cuentas.models';
+import { Cuenta, TipoCuenta } from '../../core/models/cuentas.models';
 
 @Component({
   selector: 'app-grupo-cuentas',

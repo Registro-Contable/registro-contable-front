@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ApiClientService } from '../../core/_services/api-client.service';
-import { CategoriaRequest, CategoriaResponse, SubCategoriaRequest, SubCategoriaResponse } from '../categorias.models';
+import { CategoriaRequest, CategoriaResponse, SubCategoriaRequest } from '../models/categorias.models';
 
 @Injectable({
   providedIn: 'root'

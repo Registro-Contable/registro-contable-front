@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MedioPago, MedioPagoRequest } from '../cuentas.models';
+import { MedioPago, MedioPagoRequest } from '../../core/models/cuentas.models';
+import { CuentasApiClientService } from '../../core/_services/cuentas-api-client.service';
 import { DialogNombreMedioPagoComponent } from '../dialog-nombre-medio-pago/dialog-nombre-medio-pago.component';
-import { CuentasApiClientService } from '../_services/cuentas-api-client.service';
 
 @Component({
   selector: 'app-medio-pago',

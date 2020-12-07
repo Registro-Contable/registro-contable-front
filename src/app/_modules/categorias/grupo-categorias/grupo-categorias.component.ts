@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { CategoriaRequest, CategoriaResponse } from '../categorias.models';
+import { CategoriaRequest, CategoriaResponse } from '../../core/models/categorias.models';
+import { CategoriasApiClienService } from '../../core/_services/categorias-api-clien.service';
 import { DialogCrearCategoriaComponent } from '../dialog-crear-categoria/dialog-crear-categoria.component';
-import { CategoriasApiClienService } from '../_services/categorias-api-clien.service';
 
 @Component({
   selector: 'app-grupo-categorias',

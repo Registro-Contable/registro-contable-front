@@ -2,7 +2,7 @@ import { formatDate } from "@angular/common";
 import { Injectable, LOCALE_ID } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ApiClientService } from '../../core/_services/api-client.service';
-import { MovimientoResponse, TipoMovimiento } from '../movimientos.models';
+import { MovimientoResponse, TipoMovimiento } from '../models/movimientos.models';
 
 @Injectable({
   providedIn: 'root'

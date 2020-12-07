@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DIA_SEMANA, MovimientoResponse, TipoMovimiento } from '../movimientos.models';
+import { DIA_SEMANA, MovimientoResponse, TipoMovimiento } from '../../core/models/movimientos.models';
 
 @Component({
   selector: 'app-movimientos-diarios-dia',

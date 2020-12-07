@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MovimientoResponse, TipoMovimiento } from '../movimientos.models';
-import { MovimientosApiClientService } from '../_service/movimientos-api-client.service';
+import { MovimientosApiClientService } from '../../core/_services/movimientos-api-client.service';
+import { MovimientoResponse, TipoMovimiento } from '../../core/models/movimientos.models';
 
 @Component({
   selector: 'app-movimientos-diarios-group',

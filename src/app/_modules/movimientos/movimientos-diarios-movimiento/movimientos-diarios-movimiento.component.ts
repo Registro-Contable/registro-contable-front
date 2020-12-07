@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MovimientoResponse, TipoMovimiento } from '../movimientos.models';
+import { MovimientoResponse, TipoMovimiento } from '../../core/models/movimientos.models';
 
 @Component({
   selector: 'app-movimientos-diarios-movimiento',
