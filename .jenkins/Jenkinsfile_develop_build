@@ -46,7 +46,7 @@ pipeline {
         }
         stage('build-artifacts') {
             steps {
-                npm run build -- --output-path=./dist/out --configuration ${CONFIGURATION}
+                sh "npm run build -- --output-path=./dist/out --configuration ${CONFIGURATION}"
             }
         }
         stage('build-docker') {
