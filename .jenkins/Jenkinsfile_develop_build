@@ -1,0 +1,78 @@
+pipeline {
+    agent {
+        docker { image 'node:latest' }
+    }
+
+    environment {
+        NAME = "registro-contable-front"
+        
+        GIT_REPO = "https://github.com/Registro-Contable/${NAME}"
+        BRANCH = "develop"
+
+        DOCKER_NAME = "registro-contable/${NAME}"
+        DOCKER_REPO = "192.168.1.5:8082"
+
+        CONFIGURATION = "production"
+    }
+
+    stages {
+        stage('pre-run') {
+            steps {
+                cleanWs()
+            }
+        }
+        stage('checkout') {
+            steps {
+                git branch: "${BRANCH}", credentialsId: "${CREDENTIALS_GITHUB}", url: "${GIT_REPO}"
+            }
+        }
+        stage('init-var') {
+            steps{
+                script{
+                    def props = readJSON file: 'package.json'
+                    VERSION = props['version']
+                }
+            }                
+        }
+        stage('validate-test') {
+            parallel {
+                stage('Static code analysis') {
+                    steps { sh 'npm run-script lint' }
+                }       
+                stage('Unit tests') {
+                    steps { sh 'npm run-script test' }
+                }
+            }
+        }
+        stage('build-artifacts') {
+            steps {
+                npm run build -- --output-path=./dist/out --configuration ${CONFIGURATION}
+            }
+        }
+        stage('build-docker') {
+            steps {
+                sh "docker build -t ${DOCKER_NAME}:${VERSION} ."
+            }
+        }
+        stage('push-docker') {
+            steps {
+                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: "${CREDENTIALS_NEXUS}", usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+                    sh "docker login -u ${USERNAME} -p ${PASSWORD} ${DOCKER_REPO}"
+                    sh "docker tag ${DOCKER_NAME}:${VERSION} ${DOCKER_REPO}/${DOCKER_NAME}:${VERSION}"
+                    sh "docker tag ${DOCKER_NAME}:${VERSION} ${DOCKER_REPO}/${DOCKER_NAME}:latest"
+                    sh "docker push ${DOCKER_REPO}/${DOCKER_NAME}:${VERSION}"
+                    sh "docker push ${DOCKER_REPO}/${DOCKER_NAME}:latest"
+                }
+                
+            }
+        }
+        stage('clean-docker') {
+            steps {
+            	sh "docker rmi ${DOCKER_NAME}:${VERSION}"
+            	sh "docker rmi ${DOCKER_REPO}/${DOCKER_NAME}:${VERSION}"
+            	sh "docker rmi ${DOCKER_REPO}/${DOCKER_NAME}:latest"
+                sh "docker image prune -f"
+            }
+        }
+    }
+}

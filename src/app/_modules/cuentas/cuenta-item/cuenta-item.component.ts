@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Cuenta, CuentaRequest, MedioPagoRequest } from '../cuentas.models';
+import { Cuenta, CuentaRequest, MedioPagoRequest } from '../../core/models/cuentas.models';
+import { CuentasApiClientService } from '../../core/_services/cuentas-api-client.service';
 import { DialogCrearMedioPagoComponent, DialogCrearMedioPagoData } from '../dialog-crear-medio-pago/dialog-crear-medio-pago.component';
 import { DialogNombreCuentaComponent } from '../dialog-nombre-cuenta/dialog-nombre-cuenta.component';
-import { CuentasApiClientService } from '../_services/cuentas-api-client.service';
 
 @Component({
   selector: 'app-cuenta-item',
@@ -74,13 +74,13 @@ export class CuentaItemComponent implements OnInit {
 
   borrarCuenta(): void {
     var confirm = window.confirm(`¿Seguro que quieres borrar la cuenta ${this.cuenta.nombre}`);
-    if(confirm) {
+    if (confirm) {
       this.cuentasApiClient.borrarCuenta(this.cuenta.id)
-          .then(res => this.refrescar.emit(true))
-          .catch(err => {
-            console.log(err);
-            alert(err);
-          })
+        .then(res => this.refrescar.emit(true))
+        .catch(err => {
+          console.log(err);
+          alert(err);
+        })
     }
   }
 }

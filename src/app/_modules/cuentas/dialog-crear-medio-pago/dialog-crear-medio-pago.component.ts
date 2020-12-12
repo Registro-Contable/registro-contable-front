@@ -1,7 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { TipoCuenta, TipoMedioPago } from '../cuentas.models';
-import { CuentasApiClientService } from '../_services/cuentas-api-client.service';
+import { TipoCuenta, TipoMedioPago } from '../../core/models/cuentas.models';
 
 @Component({
   selector: 'app-dialog-crear-medio-pago',

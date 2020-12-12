@@ -2,7 +2,7 @@
     <mat-expansion-panel-header>
         <mat-panel-title class="d-flex justify-content-between">
             <span>{{ cuenta.nombre }}</span>
-            <span>{{ cuenta.capital }} €</span>
+            <span>{{ cuenta.capitalCuenta?.capital || '0' }} €</span>
         </mat-panel-title>
     </mat-expansion-panel-header>
 

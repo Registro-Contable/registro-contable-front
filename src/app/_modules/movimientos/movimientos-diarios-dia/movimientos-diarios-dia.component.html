@@ -1,0 +1,35 @@
+<div class="container p-3">
+
+    <div class="d-flex justify-content-between align-items-center border-bottom pb-2">
+        <div class="d-flex  align-items-center">
+            <div class="dia mr-2">{{ dia }}</div>
+            <div>
+                <div>{{ mes }}</div>
+                <div>{{ semana }}</div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <div>Ingresos</div>
+                <div class="color-ingreso">{{ ingresos }} €</div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <div>Gastos</div>
+                <div class="color-gasto">{{ gastos }} €</div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <div>Balance</div>
+                <div>{{ ingresos - gastos }} €</div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngFor="let mov of movimientos" class="pt-2">
+        <app-movimientos-diarios-movimiento [movimiento]="mov" (refrescar)="procesaRefrescar($event)"></app-movimientos-diarios-movimiento>
+    </div>
+
+</div>

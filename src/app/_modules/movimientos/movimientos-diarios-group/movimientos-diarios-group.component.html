@@ -1,0 +1,12 @@
+<div class="container mt-3">
+
+    <app-selector-meses (cambioMes)="cambioMes($event)"></app-selector-meses>
+    <app-resumen-balance [ingresos]="ingresos" [gastos]="gastos"></app-resumen-balance>
+
+    <div class="pt-3" [ngClass]="{'border-bottom' : movimientosDia.size > 0}">
+        <div *ngFor="let mov of movimientosDia | keyvalue" class="border-left border-top border-right">
+            <app-movimientos-diarios-dia (refrescar)="procesaRefrescar($event)" [dia]="mov.key" [movimientos]="mov.value" [date]="dateSelected"></app-movimientos-diarios-dia>
+        </div>
+    </div>
+
+</div>

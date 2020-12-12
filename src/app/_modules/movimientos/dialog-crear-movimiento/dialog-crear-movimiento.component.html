@@ -1,0 +1,95 @@
+<form (submit)="submit()" [formGroup]="movimientosForm">
+    <h1 mat-dialog-title>Nuevo movimiento</h1>
+    <div mat-dialog-content>
+        <div class="row">
+            <mat-form-field appearance="fill" class="col-12">
+                <mat-label>Fecha</mat-label>
+                <input matInput [matDatepicker]="picker" (dateChange)="changeHora()" [(ngModel)]="date"
+                    formControlName="date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field appearance="fill" class="col-4">
+                <mat-label>Hora</mat-label>
+                <mat-select (selectionChange)="changeHora()" [(ngModel)]="hora" formControlName="hora">
+                    <mat-option *ngFor="let h of horas" [value]="h">{{ h }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="col-4">
+                <mat-label>Minuto</mat-label>
+                <mat-select (selectionChange)="changeHora()" [(ngModel)]="minuto" formControlName="minuto">
+                    <mat-option *ngFor="let m of minutos" [value]="m">{{ m }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="col-4">
+                <mat-label>Segundo</mat-label>
+                <mat-select (selectionChange)="changeHora()" [(ngModel)]="segundo" formControlName="segundo">
+                    <mat-option *ngFor="let s of segundos" [value]="s">{{ s }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field appearance="fill" class="col-12">
+                <mat-label>Tipo movimientos</mat-label>
+                <mat-select (selectionChange)="changeTipoMovimiento()" [(ngModel)]="tipoMovimiento" cdkFocusInitial
+                    formControlName="tipo">
+                    <mat-option *ngFor="let t of tiposMovimiento" [value]="t">{{ parseTipoMovimiento(t) }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field appearance="fill" class="col-6">
+                <mat-label>Cuenta</mat-label>
+                <mat-select [(ngModel)]="cuenta" (selectionChange)="changeCuenta()" formControlName="cuenta">
+                    <mat-option *ngFor="let c of cuentas" [value]="c">{{ c.nombre }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="col-6" *ngIf="cuenta?.mediosPago?.length > 0">
+                <mat-label>Medio Pago</mat-label>
+                <mat-select [(ngModel)]="data.medioPagoId"  formControlName="medioPago">
+                    <mat-option *ngFor="let mp of cuenta?.mediosPago" [value]="mp.id">
+                        {{ mp.nombre || mp.tipoMedioPago.id }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="row" *ngIf="isCategoria">
+            <mat-form-field appearance="fill" class="col-6">
+                <mat-label>Categoria</mat-label>
+                <mat-select (selectionChange)="changeCategoria()" [(ngModel)]="categoria" formControlName="categoria">
+                    <mat-option *ngFor="let c of categorias" [value]="c">{{ c.nombre }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="col-6" *ngIf="categoria?.subCategorias?.length > 0">
+                <mat-label>Sub categoria</mat-label>
+                <mat-select [(ngModel)]="data.subCategoriaId" formControlName="subCategoria">
+                    <mat-option *ngFor="let sc of categoria?.subCategorias" [value]="sc.id">{{ sc.nombre }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="row">
+            <mat-form-field appearance="fill" class="col-6">
+                <mat-label>Cantidad</mat-label>
+                <input matInput [(ngModel)]="data.cantidad" type="number" formControlName="cantidad">
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="col-6">
+                <mat-label>Concepto</mat-label>
+                <input matInput [(ngModel)]="data.concepto" type="text" formControlName="concepto">
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field appearance="fill" class="col-12">
+                <mat-label>Nota</mat-label>
+                <textarea matInput [(ngModel)]="data.nota" formControlName="nota"></textarea>
+            </mat-form-field>
+        </div>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button (click)="onNoClick()" type="button">Cancelar</button>
+        <button mat-button type="submit" [disabled]="movimientosForm.invalid">Guardar</button>
+    </div>
+</form>

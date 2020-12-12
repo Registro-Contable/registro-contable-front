@@ -1,9 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Cuenta, CuentaRequest } from '../cuentas.models';
+import { CuentaRequest } from '../../core/models/cuentas.models';
+import { CuentasApiClientService } from '../../core/_services/cuentas-api-client.service';
 import { DialogCrearCuentaComponent, DialogCrearCuentaData } from '../dialog-crear-cuenta/dialog-crear-cuenta.component';
-import { DialogNombreCuentaComponent } from '../dialog-nombre-cuenta/dialog-nombre-cuenta.component';
-import { CuentasApiClientService } from '../_services/cuentas-api-client.service';
 
 @Component({
   selector: 'app-cuentas-toolbar',

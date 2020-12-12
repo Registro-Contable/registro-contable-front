@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Cuenta, TipoCuenta } from '../cuentas.models';
-import { CuentasApiClientService } from '../_services/cuentas-api-client.service';
+import { Cuenta, TipoCuenta } from '../../core/models/cuentas.models';
+import { CuentasApiClientService } from '../../core/_services/cuentas-api-client.service';
 
 @Component({
   selector: 'app-cuentas-main',
@@ -28,8 +28,8 @@ export class CuentasMainComponent implements OnInit {
     var sum = 0
     this.cuentasMap.forEach((v, k) => {
       v.forEach(c => {
-        if (c.capital > 0) {
-          sum += c.capital
+        if (c.capitalCuenta && c.capitalCuenta.capital > 0) {
+          sum += c.capitalCuenta.capital
         }
       })
     })
@@ -40,8 +40,8 @@ export class CuentasMainComponent implements OnInit {
     var sum = 0
     this.cuentasMap.forEach((v, k) => {
       v.forEach(c => {
-        if (c.capital < 0) {
-          sum += c.capital
+        if (c.capitalCuenta && c.capitalCuenta.capital < 0) {
+          sum += c.capitalCuenta.capital
         }
       })
     })
@@ -62,6 +62,8 @@ export class CuentasMainComponent implements OnInit {
               array = [];
             }
 
+            this.getCapitalRequest(c);
+
             array.push(c);
             this.cuentasMap.set(c.tipoCuenta.id, array);
           }
@@ -70,6 +72,16 @@ export class CuentasMainComponent implements OnInit {
       .catch(err => {
         console.log(err);
         alert(err);
+      })
+  }
+
+  private getCapitalRequest(c: Cuenta) {
+    this.cuentasApiClient.capitalCuenta(c.id)
+      .then(data => {
+        c.capitalCuenta = data;
+      })
+      .catch(err => {
+        console.log(err);
       })
   }
 

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Cuenta, TipoCuenta } from '../cuentas.models';
+import { Cuenta, TipoCuenta } from '../../core/models/cuentas.models';
 
 @Component({
   selector: 'app-grupo-cuentas',
@@ -23,7 +23,7 @@ export class GrupoCuentasComponent implements OnInit {
 
   get totalCapital(): number {
     var sum = 0;
-    this.listaCuentas.forEach(c => sum += c.capital);
+    this.listaCuentas.forEach(c => sum += c.capitalCuenta?.capital || 0);
     return sum;
   }
 
