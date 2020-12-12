@@ -36,6 +36,9 @@ pipeline {
                 }
             }                
         }
+        stage('npm-install') {
+            steps { sh 'npm install' }
+        }
         stage('validate-test') {
             parallel {
                 stage('Static code analysis') {
