@@ -34,6 +34,12 @@ export class MovimientosDiariosGroupComponent implements OnInit, OnDestroy {
     this.cargarMovimientos();
   }
 
+  procesaRefrescar(refrescar) {
+    if (refrescar) {
+      this.cargarMovimientos();
+    }
+  }
+
   private cargarMovimientos() {
     const firstDay = new Date(this.dateSelected.getFullYear(), this.dateSelected.getMonth(), 1);
     const lastDay = new Date(this.dateSelected.getFullYear(), this.dateSelected.getMonth() + 1, 0);

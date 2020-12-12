@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MovimientoResponse, TipoMovimiento } from '../../core/models/movimientos.models';
+import { MovimientosApiClientService } from '../../core/_services/movimientos-api-client.service';
 
 @Component({
   selector: 'app-movimientos-diarios-movimiento',
@@ -8,10 +9,10 @@ import { MovimientoResponse, TipoMovimiento } from '../../core/models/movimiento
 })
 export class MovimientosDiariosMovimientoComponent implements OnInit {
 
-  @Input()
-  movimiento: MovimientoResponse;
+  @Input() movimiento: MovimientoResponse;
+  @Output() refrescar = new EventEmitter<boolean>();
 
-  constructor() { }
+  constructor(private movimientosApiClient: MovimientosApiClientService) { }
 
   ngOnInit(): void {
   }
@@ -33,5 +34,18 @@ export class MovimientosDiariosMovimientoComponent implements OnInit {
 
   get isGasto(): boolean {
     return this.tipoMovimiento == TipoMovimiento.GASTO;
+  }
+
+  borrar(): void {
+    var confirm = window.confirm("¿Eliminar este movimiento?");
+    if (confirm) {
+      this.movimientosApiClient.borrarMovimiento(this.movimiento.id)
+        .then(_ => {
+          this.refrescar.emit(true);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
   }
 }

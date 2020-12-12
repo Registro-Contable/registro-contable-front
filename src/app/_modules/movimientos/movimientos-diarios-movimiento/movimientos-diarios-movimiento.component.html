@@ -2,4 +2,12 @@
     <div>{{ movimiento.categoria.nombre }}</div>
     <div>{{ movimiento.concepto }}</div>
     <div [ngClass]="{'color-ingreso': isIngreso, 'color-gasto': isGasto}">{{ cantidad }} €</div>
+    <div>
+        <button mat-icon-button>
+            <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="borrar()">
+            <mat-icon>remove_circle</mat-icon>
+        </button>
+    </div>
 </div>

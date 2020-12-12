@@ -44,8 +44,13 @@ export class MovimientosApiClientService {
     return this.apiClient.doGet(path);
   }
 
-  crearMovimiento(movimiento: MovimientoRequest): Promise<void> {
+  crearMovimiento(movimiento: MovimientoRequest): Promise<MovimientoResponse> {
     var path = `${this.pathBase}`;
     return this.apiClient.doPost(path, movimiento);
+  }
+
+  borrarMovimiento(movimientoId: number): Promise<void> {
+    var path = `${this.pathBase}/${movimientoId}`;
+    return this.apiClient.doDelete(path);
   }
 }

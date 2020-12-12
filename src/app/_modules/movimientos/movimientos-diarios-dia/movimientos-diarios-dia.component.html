@@ -29,7 +29,7 @@
     </div>
 
     <div *ngFor="let mov of movimientos" class="pt-2">
-        <app-movimientos-diarios-movimiento [movimiento]="mov"></app-movimientos-diarios-movimiento>
+        <app-movimientos-diarios-movimiento [movimiento]="mov" (refrescar)="procesaRefrescar($event)"></app-movimientos-diarios-movimiento>
     </div>
 
 </div>

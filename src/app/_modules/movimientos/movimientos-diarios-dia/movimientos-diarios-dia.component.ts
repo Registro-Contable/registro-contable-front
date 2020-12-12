@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DIA_SEMANA, MovimientoResponse, TipoMovimiento } from '../../core/models/movimientos.models';
 
 @Component({
@@ -8,16 +8,18 @@ import { DIA_SEMANA, MovimientoResponse, TipoMovimiento } from '../../core/model
 })
 export class MovimientosDiariosDiaComponent implements OnInit {
 
-  @Input()
-  date: Date;
-  @Input()
-  dia: number;
-  @Input()
-  movimientos: Array<MovimientoResponse>;
+  @Input() date: Date;
+  @Input() dia: number;
+  @Input() movimientos: Array<MovimientoResponse>;
+  @Output() refrescar = new EventEmitter<boolean>();
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  procesaRefrescar(refrescar) {
+    this.refrescar.emit(refrescar);
   }
 
   get ingresos(): number {
@@ -43,11 +45,11 @@ export class MovimientosDiariosDiaComponent implements OnInit {
   }
 
   get mes(): string {
-    return `${this.date.getMonth()+1}.${this.date.getFullYear()}`;
+    return `${this.date.getMonth() + 1}.${this.date.getFullYear()}`;
   }
 
   get semana(): string {
     const aux = new Date(this.date.getFullYear(), this.date.getMonth(), this.dia);
-    return `${DIA_SEMANA[aux.getDay()-1].substr(0,3)}`;
+    return `${DIA_SEMANA[aux.getDay() - 1].substr(0, 3)}`;
   }
 }
