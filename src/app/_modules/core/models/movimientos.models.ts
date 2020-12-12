@@ -2,6 +2,7 @@ export interface MovimientoRequest {
     fecha?: string;
     tipoMovimientoId?: string;
     categoriaId?: string;
+    subCategoriaId?: string;
     cuentaId?: string;
     medioPagoId?: string;
     cantidad?: number;

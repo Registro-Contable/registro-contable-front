@@ -1,10 +1,10 @@
 import { formatDate } from '@angular/common';
-import { Component, isDevMode, OnInit } from '@angular/core';
+import { Component, Inject, isDevMode, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CategoriaResponse } from '../../core/models/categorias.models';
 import { Cuenta } from '../../core/models/cuentas.models';
-import { MovimientoRequest, TipoMovimiento } from '../../core/models/movimientos.models';
+import { MovimientoRequest, MovimientoResponse, TipoMovimiento } from '../../core/models/movimientos.models';
 import { CategoriasApiClienService } from '../../core/_services/categorias-api-clien.service';
 import { CuentasApiClientService } from '../../core/_services/cuentas-api-client.service';
 
@@ -65,16 +65,29 @@ export class DialogCrearMovimientoComponent implements OnInit {
   });
 
   constructor(
-    public dialogRef: MatDialogRef<DialogCrearMovimientoComponent>, private cuentasApiClient: CuentasApiClientService, private categoriasApiClient: CategoriasApiClienService) {
+    public dialogRef: MatDialogRef<DialogCrearMovimientoComponent>, private cuentasApiClient: CuentasApiClientService, private categoriasApiClient: CategoriasApiClienService,
+    @Inject(MAT_DIALOG_DATA) private inputData?: MovimientoResponse) {
     this.horas = new Array(24).fill(24).map((_, i) => i);
     this.minutos = new Array(60).fill(60).map((_, i) => i);
     this.segundos = new Array(60).fill(60).map((_, i) => i);
     this.tiposMovimiento = [TipoMovimiento.INGRESO, TipoMovimiento.GASTO, TipoMovimiento.TRASPASO];
 
-    this.date = new Date();
+    if (isDevMode()) {
+      console.log(inputData);
+    }
+
+    this.date = inputData ? new Date(inputData.fecha) : new Date();
     this.hora = this.date.getHours();
     this.minuto = this.date.getMinutes();
     this.segundo = this.date.getSeconds();
+
+    if (inputData) {
+      this.tipoMovimiento = TipoMovimiento[inputData.tipoMovimientoId];
+      this.changeTipoMovimiento();
+      this.data.cantidad = inputData.cantidad;
+      this.data.concepto = inputData.concepto;
+      this.data.nota = inputData.nota;
+    }
   }
 
   ngOnInit(): void {
@@ -129,14 +142,28 @@ export class DialogCrearMovimientoComponent implements OnInit {
 
   private cuentasRequest() {
     this.cuentasApiClient.listaCuentas()
-      .then(lista => this.cuentas = lista)
+      .then(lista => {
+        this.cuentas = lista;
+        if (this.inputData) {
+          this.cuenta = this.cuentas.find(c => c.id == this.inputData.cuenta.cuentaId);
+          this.changeCuenta();
+          this.data.medioPagoId = this.cuenta.mediosPago.find(mp => mp.id == this.inputData.cuenta.medioPago?.medioPagoId)?.id;
+        }
+      })
       .catch(err => console.log(err));
   }
 
   private categoriasRequest() {
     if (this.isCategoria) {
       this.categoriasApiClient.listaCategorias(this.data.tipoMovimientoId)
-        .then(lista => this.categorias = lista)
+        .then(lista => {
+          this.categorias = lista;
+          if (this.inputData) {
+            this.categoria = this.categorias.find(c => c.id == this.inputData.categoria.categoriaId);
+            this.changeCategoria();
+            this.data.subCategoriaId = this.categoria.subCategorias?.find(sc => sc.id == this.inputData.categoria.subCategoria?.subCategoriaId)?.id;
+          }
+        })
         .catch(err => console.log(err));
     }
   }

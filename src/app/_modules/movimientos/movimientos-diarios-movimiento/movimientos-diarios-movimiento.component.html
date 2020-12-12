@@ -3,7 +3,7 @@
     <div>{{ movimiento.concepto }}</div>
     <div [ngClass]="{'color-ingreso': isIngreso, 'color-gasto': isGasto}">{{ cantidad }} €</div>
     <div>
-        <button mat-icon-button>
+        <button mat-icon-button (click)="openModificarMovimientoDialog()">
             <mat-icon>edit</mat-icon>
         </button>
         <button mat-icon-button (click)="borrar()">

@@ -53,4 +53,9 @@ export class MovimientosApiClientService {
     var path = `${this.pathBase}/${movimientoId}`;
     return this.apiClient.doDelete(path);
   }
+
+  modificarMovimiento(movimientoId: number, movimiento: MovimientoRequest): Promise<MovimientoResponse> {
+    var path = `${this.pathBase}/${movimientoId}`;
+    return this.apiClient.doPut(path, movimiento);
+  }
 }

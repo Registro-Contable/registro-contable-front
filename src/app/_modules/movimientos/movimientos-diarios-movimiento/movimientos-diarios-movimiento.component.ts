@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { MovimientoResponse, TipoMovimiento } from '../../core/models/movimientos.models';
+import { MatDialog } from '@angular/material/dialog';
+import { MovimientoRequest, MovimientoResponse, TipoMovimiento } from '../../core/models/movimientos.models';
 import { MovimientosApiClientService } from '../../core/_services/movimientos-api-client.service';
+import { DialogCrearMovimientoComponent } from '../dialog-crear-movimiento/dialog-crear-movimiento.component';
 
 @Component({
   selector: 'app-movimientos-diarios-movimiento',
@@ -12,7 +14,7 @@ export class MovimientosDiariosMovimientoComponent implements OnInit {
   @Input() movimiento: MovimientoResponse;
   @Output() refrescar = new EventEmitter<boolean>();
 
-  constructor(private movimientosApiClient: MovimientosApiClientService) { }
+  constructor(private movimientosApiClient: MovimientosApiClientService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
@@ -47,5 +49,22 @@ export class MovimientosDiariosMovimientoComponent implements OnInit {
           console.log(err);
         });
     }
+  }
+
+  openModificarMovimientoDialog(): void {
+    const dialogRef = this.dialog.open(DialogCrearMovimientoComponent, {
+      data: this.movimiento
+    });
+
+    dialogRef.afterClosed().subscribe((result: MovimientoRequest) => {
+      if (result) {
+        this.movimientosApiClient.modificarMovimiento(this.movimiento.id, result)
+          .then(m => {
+            this.movimiento = m;
+            this.refrescar.emit(true)
+          })
+          .catch(err => console.log(err));
+      }
+    });
   }
 }
