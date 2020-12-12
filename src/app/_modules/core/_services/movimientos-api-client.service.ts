@@ -2,7 +2,7 @@ import { formatDate } from "@angular/common";
 import { Injectable, LOCALE_ID } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ApiClientService } from '../../core/_services/api-client.service';
-import { MovimientoResponse, TipoMovimiento } from '../models/movimientos.models';
+import { MovimientoRequest, MovimientoResponse, TipoMovimiento } from '../models/movimientos.models';
 
 @Injectable({
   providedIn: 'root'
@@ -42,5 +42,10 @@ export class MovimientosApiClientService {
       path = `${path}${prepend}toDate=${encodeURIComponent(date)}`;
     }
     return this.apiClient.doGet(path);
+  }
+
+  crearMovimiento(movimiento: MovimientoRequest): Promise<void> {
+    var path = `${this.pathBase}`;
+    return this.apiClient.doPost(path, movimiento);
   }
 }

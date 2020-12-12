@@ -18,6 +18,9 @@ export class DialogCrearCategoriaComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  submit(): void {
+    this.dialogRef.close(this.data.nombre);
+  }
 }
 
 export interface DialogCrearCategoriaData {

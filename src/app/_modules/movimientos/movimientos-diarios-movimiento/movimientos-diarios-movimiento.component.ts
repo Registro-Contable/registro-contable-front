@@ -18,7 +18,7 @@ export class MovimientosDiariosMovimientoComponent implements OnInit {
 
   get cantidad(): number {
     if (this.isGasto) {
-      return this.movimiento.cantidad * -1;
+      // return this.movimiento.cantidad * -1;
     }
     return this.movimiento.cantidad;
   }

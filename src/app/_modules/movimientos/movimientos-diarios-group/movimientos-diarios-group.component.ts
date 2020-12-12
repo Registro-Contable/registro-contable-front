@@ -1,13 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MovimientosApiClientService } from '../../core/_services/movimientos-api-client.service';
 import { MovimientoResponse, TipoMovimiento } from '../../core/models/movimientos.models';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-movimientos-diarios-group',
   templateUrl: './movimientos-diarios-group.component.html',
   styleUrls: ['./movimientos-diarios-group.component.scss']
 })
-export class MovimientosDiariosGroupComponent implements OnInit {
+export class MovimientosDiariosGroupComponent implements OnInit, OnDestroy {
+
+  private eventsSubscription: Subscription;
+  @Input() events: Observable<void>;
 
   dateSelected: Date = new Date();
   movimientosDia: Map<Number, Array<MovimientoResponse>> = new Map();
@@ -17,7 +21,12 @@ export class MovimientosDiariosGroupComponent implements OnInit {
   constructor(private movimientosApiClient: MovimientosApiClientService) { }
 
   ngOnInit(): void {
+    this.eventsSubscription = this.events.subscribe(() => this.cargarMovimientos());
     this.cargarMovimientos();
+  }
+
+  ngOnDestroy(): void {
+    this.eventsSubscription.unsubscribe();
   }
 
   cambioMes(date) {

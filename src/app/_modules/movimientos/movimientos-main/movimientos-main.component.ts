@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-movimientos-main',
@@ -7,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MovimientosMainComponent implements OnInit {
 
+  eventsSubject: Subject<void> = new Subject<void>();
+
   constructor() { }
 
   ngOnInit(): void {
@@ -14,6 +17,7 @@ export class MovimientosMainComponent implements OnInit {
 
   procesaRefrescar(refrescar) {
     if (refrescar) {
+      this.eventsSubject.next();
     }
   }
 
