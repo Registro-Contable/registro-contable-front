@@ -12,8 +12,8 @@ import { AuthService } from '../_services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  faUser = faUser
-  faLock = faLock
+  faUser = faUser;
+  faLock = faLock;
 
   private returnUrl;
 
@@ -22,9 +22,9 @@ export class LoginComponent implements OnInit {
     fcPassword: new FormControl(''),
   });
 
-  errorMsg: String;
+  errorMsg: string;
 
-  constructor(private auth: AuthService, private authApiClient: AuthApiClientService, private route: ActivatedRoute, private router: Router,) {
+  constructor(private auth: AuthService, private authApiClient: AuthApiClientService, private route: ActivatedRoute, private router: Router) {
     this.route.queryParams.subscribe(params => {
       this.returnUrl = params['returnUrl'];
     });
@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  onSubmit() {
+  onSubmit(): void {
     const usuario = this.loginForm.get('fcUsuario').value;
     const pass = this.loginForm.get('fcPassword').value;
 
@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
     }).catch(err => {
       console.log(err);
       this.errorMsg = err.error.error_description;
-    })
+    });
   }
 
 }

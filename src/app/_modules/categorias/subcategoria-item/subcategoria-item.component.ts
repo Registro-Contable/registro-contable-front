@@ -31,28 +31,27 @@ export class SubcategoriaItemComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        var subcategoria: SubCategoriaRequest = {
+        const subcategoria: SubCategoriaRequest = {
           nombre: result,
         };
         this.categoriasApiClient.modificarSubcategoria(this.subcategoria.parentId, this.subcategoria.id, subcategoria)
           .then(_ => this.refrescar.emit(true))
           .catch(err => {
             console.log(err);
-            alert("Error en la peticion");
-          })
+            alert('Error en la peticion');
+          });
       }
     });
   }
 
-  eliminarSubcategoria() {
-    var confirm = window.confirm("¿Estas seguro de eliminar esta categoria?");
+  eliminarSubcategoria(): void {
+    const confirm = window.confirm('¿Estas seguro de eliminar esta categoria?');
     if (confirm) {
       this.categoriasApiClient.eliminarSubcategoria(this.subcategoria.parentId, this.subcategoria.id)
-        .then(_ => { this.refrescar.emit(true) })
+        .then(_ => { this.refrescar.emit(true); })
         .catch(err => {
           console.log(err);
-          alert("Error en la peticion");
-        })
+        });
     }
   }
 

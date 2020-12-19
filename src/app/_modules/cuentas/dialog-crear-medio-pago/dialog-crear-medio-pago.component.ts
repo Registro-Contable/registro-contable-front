@@ -9,7 +9,7 @@ import { TipoCuenta, TipoMedioPago } from '../../core/models/cuentas.models';
 })
 export class DialogCrearMedioPagoComponent implements OnInit {
 
-  listaTipoMediosPago: Array<TipoMedioPago> = []
+  listaTipoMediosPago: Array<TipoMedioPago> = [];
 
   constructor(public dialogRef: MatDialogRef<DialogCrearMedioPagoComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogCrearMedioPagoData) { }
 

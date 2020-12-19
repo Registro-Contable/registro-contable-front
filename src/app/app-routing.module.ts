@@ -11,7 +11,7 @@ import { MovimientosMainComponent } from './_modules/movimientos/movimientos-mai
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: '', redirectTo: "/app", pathMatch: "full" },
+  { path: '', redirectTo: '/app', pathMatch: 'full' },
   {
     path: 'app', component: MainComponent, canActivate: [AuthGuard],
     children: [

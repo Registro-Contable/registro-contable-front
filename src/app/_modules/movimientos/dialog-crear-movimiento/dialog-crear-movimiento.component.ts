@@ -95,12 +95,12 @@ export class DialogCrearMovimientoComponent implements OnInit {
     this.changeHora();
   }
 
-  changeHora() {
+  changeHora(): void {
     this.date.setHours(this.hora);
     this.date.setMinutes(this.minuto);
     this.date.setSeconds(this.segundo);
 
-    var date = formatDate(this.date, this.format, this.locale);
+    const date = formatDate(this.date, this.format, this.locale);
     this.data.fecha = date;
 
     if (isDevMode()) {
@@ -112,7 +112,7 @@ export class DialogCrearMovimientoComponent implements OnInit {
     return TipoMovimiento[tipoMovimiento];
   }
 
-  changeTipoMovimiento() {
+  changeTipoMovimiento(): void {
     this.data.tipoMovimientoId = this.parseTipoMovimiento(this.tipoMovimiento);
     this.categoria = null;
     this.categoriasRequest();
@@ -121,14 +121,14 @@ export class DialogCrearMovimientoComponent implements OnInit {
     }
   }
 
-  changeCuenta() {
+  changeCuenta(): void {
     this.data.cuentaId = this.cuenta.id;
     if (isDevMode()) {
       console.log(this.data.cuentaId);
     }
   }
 
-  changeCategoria() {
+  changeCategoria(): void {
     this.data.categoriaId = this.categoria.id;
     if (isDevMode()) {
       console.log(this.data.categoriaId);
@@ -136,32 +136,32 @@ export class DialogCrearMovimientoComponent implements OnInit {
   }
 
   get isCategoria(): boolean {
-    return this.data.tipoMovimientoId == TipoMovimiento[TipoMovimiento.GASTO]
-      || this.data.tipoMovimientoId == TipoMovimiento[TipoMovimiento.INGRESO]
+    return this.data.tipoMovimientoId === TipoMovimiento[TipoMovimiento.GASTO]
+      || this.data.tipoMovimientoId === TipoMovimiento[TipoMovimiento.INGRESO];
   }
 
-  private cuentasRequest() {
+  private cuentasRequest(): void {
     this.cuentasApiClient.listaCuentas()
       .then(lista => {
         this.cuentas = lista;
         if (this.inputData) {
-          this.cuenta = this.cuentas.find(c => c.id == this.inputData.cuenta.cuentaId);
+          this.cuenta = this.cuentas.find(c => c.id === this.inputData.cuenta.cuentaId);
           this.changeCuenta();
-          this.data.medioPagoId = this.cuenta.mediosPago.find(mp => mp.id == this.inputData.cuenta.medioPago?.medioPagoId)?.id;
+          this.data.medioPagoId = this.cuenta.mediosPago.find(mp => mp.id === this.inputData.cuenta.medioPago?.medioPagoId)?.id;
         }
       })
       .catch(err => console.log(err));
   }
 
-  private categoriasRequest() {
+  private categoriasRequest(): void {
     if (this.isCategoria) {
       this.categoriasApiClient.listaCategorias(this.data.tipoMovimientoId)
         .then(lista => {
           this.categorias = lista;
           if (this.inputData) {
-            this.categoria = this.categorias.find(c => c.id == this.inputData.categoria.categoriaId);
+            this.categoria = this.categorias.find(c => c.id === this.inputData.categoria.categoriaId);
             this.changeCategoria();
-            this.data.subCategoriaId = this.categoria.subCategorias?.find(sc => sc.id == this.inputData.categoria.subCategoria?.subCategoriaId)?.id;
+            this.data.subCategoriaId = this.categoria.subCategorias?.find(sc => sc.id === this.inputData.categoria.subCategoria?.subCategoriaId)?.id;
           }
         })
         .catch(err => console.log(err));
@@ -175,13 +175,13 @@ export class DialogCrearMovimientoComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  submit() {
+  submit(): void {
     if (isDevMode()) {
       console.log(this.data);
       console.log(this.movimientosForm.valid);
     }
     if (this.movimientosForm.valid) {
-      if (this.tipoMovimiento == TipoMovimiento.GASTO) {
+      if (this.tipoMovimiento === TipoMovimiento.GASTO) {
         this.data.cantidad = this.data.cantidad * -1;
       }
       this.dialogRef.close(this.data);

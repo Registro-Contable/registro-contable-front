@@ -30,7 +30,7 @@ export class MedioPagoComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        var medioPagoAux: MedioPagoRequest = {
+        const medioPagoAux: MedioPagoRequest = {
           nombre: result
         };
         this.cuentasApiClient.modificarMedioPago(this.medioPago.cuentaId, this.medioPago.id, medioPagoAux)
@@ -38,20 +38,20 @@ export class MedioPagoComponent implements OnInit {
           .catch(err => {
             console.log(err);
             alert(err);
-          })
+          });
       }
     });
   }
 
-  eliminarSubcategoria() {
-    var confirm = window.confirm("¿Estas seguro de eliminar este medio pago?");
+  eliminarSubcategoria(): void {
+    const confirm = window.confirm('¿Estas seguro de eliminar este medio pago?');
     if (confirm) {
       this.cuentasApiClient.borrarMedioPago(this.medioPago.cuentaId, this.medioPago.id)
-        .then(_ => { this.refrescar.emit(true) })
+        .then(_ => { this.refrescar.emit(true); })
         .catch(err => {
           console.log(err);
-          alert("Error en la peticion");
-        })
+          alert('Error en la peticion');
+        });
     }
   }
 }

@@ -22,20 +22,19 @@ export class GrupoCategoriasComponent implements OnInit {
     this.cargarCategorias();
   }
 
-  procesaRefrescar(refrescar) {
+  procesaRefrescar(refrescar): void {
     if (refrescar === true) {
       this.cargarCategorias();
     }
   }
 
-  private cargarCategorias() {
+  private cargarCategorias(): void {
     this.categoriasApiClient.listaCategorias(this.tipoMovimiento)
       .then(list => {
         this.categorias = list;
       })
       .catch(err => {
         console.log(err);
-        alert("Error en la peticion");
       });
   }
 
@@ -43,14 +42,14 @@ export class GrupoCategoriasComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogCrearCategoriaComponent, {
       width: '250px',
       data: {
-        titulo: "Crear categoria",
-        nombre: ""
+        titulo: 'Crear categoria',
+        nombre: ''
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        var categoria: CategoriaRequest = {
+        const categoria: CategoriaRequest = {
           nombre: result,
           tipoMovimiento: this.tipoMovimiento
         };
@@ -58,8 +57,7 @@ export class GrupoCategoriasComponent implements OnInit {
           .then(res => this.categorias.push(res))
           .catch(err => {
             console.log(err);
-            alert("Error en la peticion");
-          })
+          });
       }
     });
   }

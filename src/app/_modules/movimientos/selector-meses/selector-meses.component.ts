@@ -19,12 +19,12 @@ export class SelectorMesesComponent implements OnInit {
     this.dateSelected = new Date();
   }
 
-  anterior() {
+  anterior(): void {
     this.dateSelected = new Date(this.dateSelected.getFullYear(), this.dateSelected.getMonth() - 1, this.dateSelected.getDate());
     this.cambioMes.emit(this.dateSelected);
   }
 
-  posterior() {
+  posterior(): void {
     this.dateSelected = new Date(this.dateSelected.getFullYear(), this.dateSelected.getMonth() + 1, this.dateSelected.getDate());
     this.cambioMes.emit(this.dateSelected);
   }

@@ -1,22 +1,22 @@
 export interface SubCategoriaResponse {
-    id: string,
-    nombre: string,
-    parentId: string
+    id: string;
+    nombre: string;
+    parentId: string;
 }
 
 export interface CategoriaResponse {
-    id: string,
-    uid: string,
-    tipoMovimiento: string,
-    nombre: string,
-    subCategorias?: Array<SubCategoriaResponse>
+    id: string;
+    uid: string;
+    tipoMovimiento: string;
+    nombre: string;
+    subCategorias?: Array<SubCategoriaResponse>;
 }
 
 export interface SubCategoriaRequest {
-    nombre: string
+    nombre: string;
 }
 
 export interface CategoriaRequest {
-    tipoMovimiento?: string,
-    nombre?: string
+    tipoMovimiento?: string;
+    nombre?: string;
 }

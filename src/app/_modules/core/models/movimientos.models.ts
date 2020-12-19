@@ -26,7 +26,7 @@ export interface MovimientoResponse {
 }
 
 export interface CategoriaMovimientoResponse {
-    categoriaId: String;
+    categoriaId: string;
     nombre: string;
     subCategoria?: SubCategoriaMovimientoResponse;
 }
@@ -52,5 +52,5 @@ export enum TipoMovimiento {
     INGRESO, GASTO, TRASPASO, AJUSTE_CAPITAL
 }
 
-export const MESES = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-export const DIA_SEMANA = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo"];
+export const MESES = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+export const DIA_SEMANA = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];

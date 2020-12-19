@@ -14,9 +14,9 @@ export class MovimientosDiariosGroupComponent implements OnInit, OnDestroy {
   @Input() events: Observable<void>;
 
   dateSelected: Date = new Date();
-  movimientosDia: Map<Number, Array<MovimientoResponse>> = new Map();
-  ingresos: number = 0;
-  gastos: number = 0;
+  movimientosDia: Map<number, Array<MovimientoResponse>> = new Map();
+  ingresos = 0;
+  gastos = 0;
 
   constructor(private movimientosApiClient: MovimientosApiClientService) { }
 
@@ -29,18 +29,18 @@ export class MovimientosDiariosGroupComponent implements OnInit, OnDestroy {
     this.eventsSubscription.unsubscribe();
   }
 
-  cambioMes(date) {
+  cambioMes(date): void {
     this.dateSelected = date;
     this.cargarMovimientos();
   }
 
-  procesaRefrescar(refrescar) {
+  procesaRefrescar(refrescar): void {
     if (refrescar) {
       this.cargarMovimientos();
     }
   }
 
-  private cargarMovimientos() {
+  private cargarMovimientos(): void {
     const firstDay = new Date(this.dateSelected.getFullYear(), this.dateSelected.getMonth(), 1);
     const lastDay = new Date(this.dateSelected.getFullYear(), this.dateSelected.getMonth() + 1, 0);
     this.movimientosApiClient.listaMovimientos({
@@ -54,15 +54,15 @@ export class MovimientosDiariosGroupComponent implements OnInit, OnDestroy {
       });
   }
 
-  private tratarMovimientosResponse(movimientos: Array<MovimientoResponse>) {
+  private tratarMovimientosResponse(movimientos: Array<MovimientoResponse>): void {
     this.ingresos = 0;
     this.gastos = 0;
     this.movimientosDia.clear();
 
     movimientos.forEach(m => {
-      var date = new Date(m.fecha);
-      var day = date.getDate();
-      var dia: Array<MovimientoResponse> = this.movimientosDia.get(day);
+      const date = new Date(m.fecha);
+      const day = date.getDate();
+      let dia: Array<MovimientoResponse> = this.movimientosDia.get(day);
       if (!dia) {
         dia = new Array();
       }
@@ -70,9 +70,9 @@ export class MovimientosDiariosGroupComponent implements OnInit, OnDestroy {
       this.movimientosDia.set(day, dia);
 
       const tipoMovimiento = TipoMovimiento[m.tipoMovimientoId];
-      if (tipoMovimiento == TipoMovimiento.INGRESO) {
+      if (tipoMovimiento === TipoMovimiento.INGRESO) {
         this.ingresos += m.cantidad;
-      } else if (tipoMovimiento == TipoMovimiento.GASTO) {
+      } else if (tipoMovimiento === TipoMovimiento.GASTO) {
         this.gastos += (m.cantidad * -1);
       }
     });

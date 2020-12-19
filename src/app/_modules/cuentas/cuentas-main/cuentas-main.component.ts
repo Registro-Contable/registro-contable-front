@@ -9,8 +9,8 @@ import { CuentasApiClientService } from '../../core/_services/cuentas-api-client
 })
 export class CuentasMainComponent implements OnInit {
 
-  tipoCuentas: Map<String, TipoCuenta> = new Map();
-  cuentasMap: Map<String, Array<Cuenta>> = new Map();
+  tipoCuentas: Map<string, TipoCuenta> = new Map();
+  cuentasMap: Map<string, Array<Cuenta>> = new Map();
 
   constructor(private cuentasApiClient: CuentasApiClientService) { }
 
@@ -18,37 +18,37 @@ export class CuentasMainComponent implements OnInit {
     this.listaCuentasRequest();
   }
 
-  procesaRefrescar(refrescar) {
+  procesaRefrescar(refrescar): void {
     if (refrescar) {
       this.listaCuentasRequest();
     }
   }
 
   get capitalTotal(): number {
-    var sum = 0
+    let sum = 0;
     this.cuentasMap.forEach((v, k) => {
       v.forEach(c => {
         if (c.capitalCuenta && c.capitalCuenta.capital > 0) {
-          sum += c.capitalCuenta.capital
+          sum += c.capitalCuenta.capital;
         }
-      })
-    })
+      });
+    });
     return sum;
   }
 
   get deberTotal(): number {
-    var sum = 0
+    let sum = 0;
     this.cuentasMap.forEach((v, k) => {
       v.forEach(c => {
         if (c.capitalCuenta && c.capitalCuenta.capital < 0) {
-          sum += c.capitalCuenta.capital
+          sum += c.capitalCuenta.capital;
         }
-      })
-    })
+      });
+    });
     return sum;
   }
 
-  private listaCuentasRequest() {
+  private listaCuentasRequest(): void {
     this.cuentasApiClient.listaCuentas()
       .then(data => {
         this.tipoCuentas = new Map();
@@ -57,7 +57,7 @@ export class CuentasMainComponent implements OnInit {
           if (c.tipoCuenta) {
             this.tipoCuentas.set(c.tipoCuenta.id, c.tipoCuenta);
 
-            var array = this.cuentasMap.get(c.tipoCuenta.id);
+            let array = this.cuentasMap.get(c.tipoCuenta.id);
             if (!array) {
               array = [];
             }
@@ -72,17 +72,17 @@ export class CuentasMainComponent implements OnInit {
       .catch(err => {
         console.log(err);
         alert(err);
-      })
+      });
   }
 
-  private getCapitalRequest(c: Cuenta) {
+  private getCapitalRequest(c: Cuenta): void {
     this.cuentasApiClient.capitalCuenta(c.id)
       .then(data => {
         c.capitalCuenta = data;
       })
       .catch(err => {
         console.log(err);
-      })
+      });
   }
 
 }

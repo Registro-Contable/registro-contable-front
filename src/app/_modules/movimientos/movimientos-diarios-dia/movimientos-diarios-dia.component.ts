@@ -18,29 +18,29 @@ export class MovimientosDiariosDiaComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  procesaRefrescar(refrescar) {
+  procesaRefrescar(refrescar): void {
     this.refrescar.emit(refrescar);
   }
 
   get ingresos(): number {
-    var ingresos = 0;
+    let ingresos = 0;
     this.movimientos.forEach(m => {
       const tipoMovimiento = TipoMovimiento[m.tipoMovimientoId];
-      if (tipoMovimiento == TipoMovimiento.INGRESO) {
+      if (tipoMovimiento === TipoMovimiento.INGRESO) {
         ingresos += m.cantidad;
       }
-    })
+    });
     return ingresos;
   }
 
   get gastos(): number {
-    var gastos = 0;
+    let gastos = 0;
     this.movimientos.forEach(m => {
       const tipoMovimiento = TipoMovimiento[m.tipoMovimientoId];
-      if (tipoMovimiento == TipoMovimiento.GASTO) {
+      if (tipoMovimiento === TipoMovimiento.GASTO) {
         gastos += (m.cantidad * -1);
       }
-    })
+    });
     return gastos;
   }
 

@@ -8,10 +8,8 @@ import { Cuenta, TipoCuenta } from '../../core/models/cuentas.models';
 })
 export class GrupoCuentasComponent implements OnInit {
 
-  @Input()
-  tipoCuenta: TipoCuenta
-  @Input()
-  listaCuentas: Array<Cuenta>
+  @Input() tipoCuenta: TipoCuenta;
+  @Input() listaCuentas: Array<Cuenta>;
 
   @Output()
   refrescar = new EventEmitter<boolean>();
@@ -22,12 +20,12 @@ export class GrupoCuentasComponent implements OnInit {
   }
 
   get totalCapital(): number {
-    var sum = 0;
+    let sum = 0;
     this.listaCuentas.forEach(c => sum += c.capitalCuenta?.capital || 0);
     return sum;
   }
 
-  procesaRefrescar(refrescar) {
+  procesaRefrescar(refrescar): void {
     this.refrescar.emit(refrescar);
   }
 }

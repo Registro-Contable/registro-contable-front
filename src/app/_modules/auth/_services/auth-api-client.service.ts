@@ -16,24 +16,24 @@ export class AuthApiClientService {
   constructor(private apiClient: ApiClientService) { }
 
   login(email: string, password: string): Promise<Credentials> {
-    var formData = new FormData();
+    const formData = new FormData();
     formData.append('grant_type', 'password');
     formData.append('username', email);
     formData.append('password', password);
 
-    var map = new Map<string, string>();
-    map.set("Authorization", `Basic ${btoa(`${this.clientId}:${this.clientSecret}`)}`);
+    const map = new Map<string, string>();
+    map.set('Authorization', `Basic ${btoa(`${this.clientId}:${this.clientSecret}`)}`);
 
     return this.apiClient.doPostFormData(`${this.pathBase}/oauth/token`, formData, map);
   }
 
   refreshToken(refreshToken: string): Promise<Credentials> {
-    var formData = new FormData();
+    const formData = new FormData();
     formData.append('grant_type', 'refresh_token');
     formData.append('refresh_token', refreshToken);
 
-    var map = new Map<string, string>();
-    map.set("Authorization", `Basic ${btoa(`${this.clientId}:${this.clientSecret}`)}`);
+    const map = new Map<string, string>();
+    map.set('Authorization', `Basic ${btoa(`${this.clientId}:${this.clientSecret}`)}`);
 
     return this.apiClient.doPostFormData(`${this.pathBase}/oauth/token`, formData, map);
   }

@@ -15,7 +15,7 @@ export class MovimientosMainComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  procesaRefrescar(refrescar) {
+  procesaRefrescar(refrescar): void {
     if (refrescar) {
       this.eventsSubject.next();
     }

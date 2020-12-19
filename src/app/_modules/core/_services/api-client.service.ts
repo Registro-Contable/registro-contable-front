@@ -21,7 +21,7 @@ export class ApiClientService {
 
   public doGetString(path: string): Promise<string> {
     const url = `${this.backUrl}${path}`;
-    var obs: Observable<string> = this.httpClient.get(url, { responseType: 'text' });
+    const obs: Observable<string> = this.httpClient.get(url, { responseType: 'text' });
     return obs.toPromise();
   }
 
@@ -32,21 +32,21 @@ export class ApiClientService {
 
   public doPost(path: string, body: any, customHeaders?: Map<string, string>): Promise<any> {
     const url = `${this.backUrl}${path}`;
-    var headers = new HttpHeaders();
+    let headers = new HttpHeaders();
     customHeaders?.forEach((v, k) => {
       headers = headers.append(k, v);
     });
-    return this.httpClient.post(url, body, { headers: headers }).toPromise();
+    return this.httpClient.post(url, body, { headers }).toPromise();
   }
 
   public doPostFormData(path: string, body: FormData, customHeaders?: Map<string, string>): Promise<any> {
     const url = `${this.backUrl}${path}`;
-    var headers = new HttpHeaders();
+    let headers = new HttpHeaders();
     customHeaders?.forEach((v, k) => {
       headers = headers.append(k, v);
     });
-    headers.append('Content-Type', undefined)
-    return this.httpClient.post(url, body, { headers: headers }).toPromise();
+    headers.append('Content-Type', undefined);
+    return this.httpClient.post(url, body, { headers }).toPromise();
   }
 
   public doPut(path: string, body: any): Promise<any> {

@@ -13,10 +13,9 @@ export class MenuLateralComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.isExpanded
   }
 
-  toggleMenu() {
+  toggleMenu(): void {
     this.isExpanded = !this.isExpanded;
   }
 

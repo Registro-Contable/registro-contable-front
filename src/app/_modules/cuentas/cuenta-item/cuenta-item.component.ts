@@ -12,11 +12,9 @@ import { DialogNombreCuentaComponent } from '../dialog-nombre-cuenta/dialog-nomb
 })
 export class CuentaItemComponent implements OnInit {
 
-  @Input("cuenta")
-  cuenta: Cuenta;
+  @Input() cuenta: Cuenta;
 
-  @Output()
-  refrescar = new EventEmitter<boolean>();
+  @Output() refrescar = new EventEmitter<boolean>();
 
   panelOpenState = false;
 
@@ -25,7 +23,7 @@ export class CuentaItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  procesaRefrescar(refrescar) {
+  procesaRefrescar(refrescar): void {
     this.refrescar.emit(refrescar);
   }
 
@@ -37,7 +35,7 @@ export class CuentaItemComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        var cuentaAux: CuentaRequest = {
+        const cuentaAux: CuentaRequest = {
           nombre: result
         };
         this.cuentasApiClient.modificarCuenta(this.cuenta.id, cuentaAux)
@@ -45,7 +43,7 @@ export class CuentaItemComponent implements OnInit {
           .catch(err => {
             console.log(err);
             alert(err);
-          })
+          });
       }
     });
   }
@@ -58,7 +56,7 @@ export class CuentaItemComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result: DialogCrearMedioPagoData) => {
       if (result) {
-        var medioPagoAux: MedioPagoRequest = {
+        const medioPagoAux: MedioPagoRequest = {
           nombre: result.nombre,
           tipoMedioPagoId: result.tipoMedioPagoId,
         };
@@ -67,20 +65,20 @@ export class CuentaItemComponent implements OnInit {
           .catch(err => {
             console.log(err);
             alert(err);
-          })
+          });
       }
     });
   }
 
   borrarCuenta(): void {
-    var confirm = window.confirm(`¿Seguro que quieres borrar la cuenta ${this.cuenta.nombre}`);
+    const confirm = window.confirm(`¿Seguro que quieres borrar la cuenta ${this.cuenta.nombre}`);
     if (confirm) {
       this.cuentasApiClient.borrarCuenta(this.cuenta.id)
         .then(res => this.refrescar.emit(true))
         .catch(err => {
           console.log(err);
           alert(err);
-        })
+        });
     }
   }
 }

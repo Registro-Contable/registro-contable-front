@@ -26,7 +26,7 @@ export class CuentasToolbarComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result: DialogCrearCuentaData) => {
       if (result) {
-        var cuentaAux: CuentaRequest = {
+        const cuentaAux: CuentaRequest = {
           nombre: result.nombre,
           tipoCuentaId: result.tipoCuentaId,
         };
@@ -35,7 +35,7 @@ export class CuentasToolbarComponent implements OnInit {
           .catch(err => {
             console.log(err);
             alert(err);
-          })
+          });
       }
     });
   }

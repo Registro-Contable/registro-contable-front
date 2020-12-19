@@ -6,11 +6,9 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./resumen-balance.component.scss']
 })
 export class ResumenBalanceComponent implements OnInit {
-  
-  @Input()
-  ingresos: number = 0;
-  @Input()
-  gastos: number = 0;
+
+  @Input() ingresos = 0;
+  @Input() gastos = 0;
 
   constructor() { }
 

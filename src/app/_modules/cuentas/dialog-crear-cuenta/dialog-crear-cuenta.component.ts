@@ -10,11 +10,11 @@ import { CuentasApiClientService } from '../../core/_services/cuentas-api-client
 })
 export class DialogCrearCuentaComponent implements OnInit {
 
-  listaTipoCuentas: Array<TipoCuenta> = []
+  listaTipoCuentas: Array<TipoCuenta> = [];
   data: DialogCrearCuentaData = {
-    tipoCuentaId: "",
-    nombre: ""
-  }
+    tipoCuentaId: '',
+    nombre: ''
+  };
 
   constructor(
     public dialogRef: MatDialogRef<DialogCrearCuentaComponent>, private cuentasApiClient: CuentasApiClientService) { }
@@ -24,7 +24,7 @@ export class DialogCrearCuentaComponent implements OnInit {
       .then(lista => this.listaTipoCuentas = lista)
       .catch(err => {
         console.log(err);
-      })
+      });
   }
 
   onNoClick(): void {

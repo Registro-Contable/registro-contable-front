@@ -31,15 +31,15 @@ export class MovimientosDiariosMovimientoComponent implements OnInit {
   }
 
   get isIngreso(): boolean {
-    return this.tipoMovimiento == TipoMovimiento.INGRESO;
+    return this.tipoMovimiento === TipoMovimiento.INGRESO;
   }
 
   get isGasto(): boolean {
-    return this.tipoMovimiento == TipoMovimiento.GASTO;
+    return this.tipoMovimiento === TipoMovimiento.GASTO;
   }
 
   borrar(): void {
-    var confirm = window.confirm("¿Eliminar este movimiento?");
+    const confirm = window.confirm('¿Eliminar este movimiento?');
     if (confirm) {
       this.movimientosApiClient.borrarMovimiento(this.movimiento.id)
         .then(_ => {
@@ -61,7 +61,7 @@ export class MovimientosDiariosMovimientoComponent implements OnInit {
         this.movimientosApiClient.modificarMovimiento(this.movimiento.id, result)
           .then(m => {
             this.movimiento = m;
-            this.refrescar.emit(true)
+            this.refrescar.emit(true);
           })
           .catch(err => console.log(err));
       }

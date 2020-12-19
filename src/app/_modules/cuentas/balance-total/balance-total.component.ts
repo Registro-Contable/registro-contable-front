@@ -7,10 +7,8 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class BalanceTotalComponent implements OnInit {
 
-  @Input()
-  totalCapital: number = 0;
-  @Input()
-  totalDeber: number = 0;
+  @Input() totalCapital = 0;
+  @Input() totalDeber = 0;
 
   constructor() { }
 

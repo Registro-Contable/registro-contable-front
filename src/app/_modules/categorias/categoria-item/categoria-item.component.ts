@@ -23,19 +23,18 @@ export class CategoriaItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  procesaRefrescar(refrescar) {
+  procesaRefrescar(refrescar): void {
     this.refrescar.emit(refrescar);
   }
 
-  eliminarCategoria() {
-    var confirm = window.confirm("¿Estas seguro de eliminar esta categoria?");
+  eliminarCategoria(): void {
+    const confirm = window.confirm('¿Estas seguro de eliminar esta categoria?');
     if (confirm) {
       this.categoriasApiClient.eliminarCategoria(this.categoria.id)
-        .then(_ => { this.refrescar.emit(true) })
+        .then(_ => { this.refrescar.emit(true); })
         .catch(err => {
           console.log(err);
-          alert("Error en la peticion");
-        })
+        });
     }
   }
 
@@ -49,15 +48,14 @@ export class CategoriaItemComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        var categoria: CategoriaRequest = {
+        const categoria: CategoriaRequest = {
           nombre: result,
         };
         this.categoriasApiClient.modificarCategoria(this.categoria.id, categoria)
           .then(_ => this.refrescar.emit(true))
           .catch(err => {
             console.log(err);
-            alert("Error en la peticion");
-          })
+          });
       }
     });
   }
@@ -66,21 +64,20 @@ export class CategoriaItemComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogCrearCategoriaComponent, {
       data: {
         titulo: `Crear subcategoria`,
-        nombre: ""
+        nombre: ''
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        var categoria: SubCategoriaRequest = {
+        const categoria: SubCategoriaRequest = {
           nombre: result,
         };
         this.categoriasApiClient.addSubcategoria(this.categoria.id, categoria)
           .then(res => this.categoria = res)
           .catch(err => {
             console.log(err);
-            alert("Error en la peticion");
-          })
+          });
       }
     });
   }
